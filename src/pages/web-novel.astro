@@ -8,7 +8,7 @@ const publishedCount = chapters.filter((c) => c.status === 'published').length;
 const totalWords = chapters.filter((c) => c.status === 'published').reduce((sum, c) => sum + c.wordCount, 0);
 ---
 
-<Layout title="Truyện dài kỳ" description="Đọc biên niên sử Aetherbound: các chương, hồi truyện và câu chuyện đang mở ra của cõi giới tan vỡ.">
+<Layout title="Truyện dài kỳ" description="Nội dung truyện của OAK đang được chuẩn bị.">
   <!-- Page header -->
   <section class="page-hero">
     <div class="container">
@@ -16,29 +16,15 @@ const totalWords = chapters.filter((c) => c.status === 'published').reduce((sum,
       <h1 class="page-title fade-in fade-in-delay-1">Truyện dài kỳ</h1>
       <div class="divider fade-in fade-in-delay-2"></div>
       <p class="page-lead fade-in fade-in-delay-2">
-        Toàn văn <em>Aetherbound</em>, được đăng tải theo từng chương. Phần mới sẽ ra mắt hằng tuần.
+        Nội dung truyện đang được chuẩn bị.
       </p>
-      <div class="stats fade-in fade-in-delay-3">
-        <div class="stat">
-          <span class="stat-num">{publishedCount}</span>
-          <span class="stat-label">Chương đã xuất bản</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">{arcs.length}</span>
-          <span class="stat-label">Hồi truyện</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">{(totalWords / 1000).toFixed(1)}k</span>
-          <span class="stat-label">Từ đã viết</span>
-        </div>
-      </div>
     </div>
   </section>
 
   <!-- Chapter list by arc -->
   <section class="section">
     <div class="container">
-      {arcs.map((arc) => {
+      {arcs.length > 0 ? arcs.map((arc) => {
         const arcChapters = chapters.filter((c) => c.arc === arc);
         return (
           <div class="arc-block">
@@ -74,7 +60,7 @@ const totalWords = chapters.filter((c) => c.status === 'published').reduce((sum,
             </div>
           </div>
         );
-      })}
+      }) : <div class="timeline-empty empty-visual"><p>Nội dung truyện đang được chuẩn bị.</p></div>}
     </div>
   </section>
 </Layout>

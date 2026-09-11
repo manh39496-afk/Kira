@@ -3,21 +3,21 @@ import Layout from '../layouts/Layout.astro';
 import { characters } from '../data/characters';
 ---
 
-<Layout title="Nhân vật" description="Các nhân vật của Aetherbound: những người lính, học giả và những kẻ từng là vua.">
+<Layout title="Nhân vật" description="Thông tin nhân vật của OAK sẽ được bổ sung khi dữ liệu canon được hoàn thiện.">
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow fade-in">Nhân vật</span>
       <h1 class="page-title fade-in fade-in-delay-1">Nhân vật</h1>
       <div class="divider fade-in fade-in-delay-2"></div>
       <p class="page-lead fade-in fade-in-delay-2">
-        Những người với lựa chọn có thể hàn gắn cõi giới tan vỡ hoặc hoàn tất sự diệt vong của nó.
+        Thông tin nhân vật đang được cập nhật.
       </p>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <div class="char-grid">
+      {characters.length > 0 ? <div class="char-grid">
         {characters.map((c, i) => (
           <article
             class:list={['char-profile', `char-${i % 2 === 0 ? 'left' : 'right'}`]}
@@ -49,7 +49,7 @@ import { characters } from '../data/characters';
             </div>
           </article>
         ))}
-      </div>
+      </div> : <div class="timeline-empty empty-visual"><p>Thông tin nhân vật đang được cập nhật.</p></div>}
     </div>
   </section>
 </Layout>
