@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+---
+
+<Layout title="Support" description="Learn how voluntary support can help sustain the SRPG project.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow fade-in">Support</span>
+      <h1 class="page-title fade-in fade-in-delay-1">Support the Project</h1>
+      <div class="divider fade-in fade-in-delay-2"></div>
+      <p class="page-lead fade-in fade-in-delay-2">
+        Support is voluntary and helps sustain continued work on the world, stories, art, and SRPG development.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container-narrow">
+      <SectionHeader eyebrow="Voluntary Support" title="Help keep development moving" subtitle="No contribution is required to explore the project. Support options will be published only when the payment details are ready and verified." align="center" />
+      <div class="support-panel">
+        <div class="qr-placeholder empty-visual" aria-label="MoMo QR code placeholder">
+          <span>MoMo QR placeholder</span>
+        </div>
+        <div class="support-copy">
+          <h2>What support helps fund</h2>
+          <p>Voluntary support can help sustain time for writing, world development, approved artwork, and project maintenance.</p>
+          <p class="support-note">Payment information has not yet been added.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    padding: 80px 0 48px;
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  .page-title {
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-size: 3rem;
+    color: var(--color-ink);
+    margin-bottom: 8px;
+  }
+
+  .page-lead {
+    max-width: 640px;
+    font-size: 1.05rem;
+    color: var(--color-ink-soft);
+  }
+
+  .support-panel {
+    display: grid;
+    grid-template-columns: minmax(220px, 280px) 1fr;
+    gap: 40px;
+    align-items: center;
+    padding: 32px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-soft);
+  }
+
+  .qr-placeholder {
+    aspect-ratio: 1;
+    border: 1px solid var(--color-border);
+  }
+
+  .support-copy h2 {
+    margin-bottom: 12px;
+    font-size: 1.6rem;
+  }
+
+  .support-copy p {
+    margin-bottom: 16px;
+  }
+
+  .support-note {
+    color: var(--color-ink-muted);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 650px) {
+    .support-panel {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding: 24px;
+    }
+
+    .qr-placeholder {
+      max-width: 240px;
+      width: 100%;
+      margin: 0 auto;
+    }
+  }
+</style>
