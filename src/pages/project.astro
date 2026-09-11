@@ -1,0 +1,118 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+
+const projectSections = [
+  {
+    eyebrow: 'Development Notes',
+    title: 'Notes will be collected here',
+    text: 'A focused place for project updates, decisions, and progress notes as development continues.',
+  },
+  {
+    eyebrow: 'Process',
+    title: 'A workspace for the making of the project',
+    text: 'The project process will be documented here without exposing internal governance or canon machinery.',
+  },
+  {
+    eyebrow: 'Milestones',
+    title: 'Milestones are in progress',
+    text: 'Approved milestones will be added as the development roadmap becomes ready to share.',
+  },
+  {
+    eyebrow: 'Behind the Scenes',
+    title: 'Development material pending',
+    text: 'Selected behind-the-scenes material can be added here as it is approved for publication.',
+  },
+];
+---
+
+<Layout title="Project" description="Development notes, process, milestones, and progress for the SRPG project.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow fade-in">Project</span>
+      <h1 class="page-title fade-in fade-in-delay-1">Project Progress</h1>
+      <div class="divider fade-in fade-in-delay-2"></div>
+      <p class="page-lead fade-in fade-in-delay-2">
+        Follow the development of the fantasy world, stories, characters, art, and SRPG ecosystem.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="project-grid">
+        {projectSections.map((section) => (
+          <article class="project-card">
+            <span class="eyebrow">{section.eyebrow}</span>
+            <h2>{section.title}</h2>
+            <p>{section.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container container-narrow">
+      <SectionHeader eyebrow="Current Progress" title="The project is taking shape" subtitle="This progress view will grow with approved development updates." align="center" />
+      <div class="progress-empty empty-visual">
+        <p>Current progress details have not yet been added.</p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    padding: 80px 0 48px;
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  .page-title {
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-size: 3rem;
+    color: var(--color-ink);
+    margin-bottom: 8px;
+  }
+
+  .page-lead {
+    max-width: 600px;
+    font-size: 1.05rem;
+    color: var(--color-ink-soft);
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .project-card {
+    padding: 28px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-soft);
+    border-top: 3px solid var(--color-gold);
+  }
+
+  .project-card h2 {
+    margin-bottom: 12px;
+    font-size: 1.5rem;
+  }
+
+  .project-card p {
+    font-size: 0.95rem;
+  }
+
+  .progress-empty {
+    min-height: 180px;
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-md);
+  }
+
+  @media (max-width: 650px) {
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
