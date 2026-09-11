@@ -66,6 +66,16 @@ import { regions, lore } from '../data/world';
     </div>
   </section>
 
+  <!-- Timeline -->
+  <section class="section">
+    <div class="container container-narrow">
+      <SectionHeader eyebrow="Timeline" title="History in Progress" subtitle="Approved world milestones will be added here as the chronology is established." align="center" />
+      <div class="timeline-empty empty-visual">
+        <p>The world timeline has not yet been added.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Factions summary -->
   <section class="section">
     <div class="container container-narrow">
@@ -224,6 +234,12 @@ import { regions, lore } from '../data/world';
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 32px;
+  }
+
+  .timeline-empty {
+    min-height: 180px;
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-md);
   }
 
   .faction-item {
