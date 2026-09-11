@@ -4,15 +4,15 @@ import SectionHeader from '../components/SectionHeader.astro';
 import { regions, lore } from '../data/world';
 ---
 
-<Layout title="Thế giới" description="Khám phá thế giới của Aetherbound: thủ đô sụp đổ, các thành bang tự do, vùng biên cương và những truyền thuyết của cõi giới tan vỡ.">
+<Layout title="Thế giới" description="Tư liệu thế giới của OAK sẽ được bổ sung khi dữ liệu canon được hoàn thiện.">
   <!-- Page hero -->
   <section class="page-hero">
     <div class="container">
-      <span class="eyebrow fade-in">Cõi giới tan vỡ</span>
+      <span class="eyebrow fade-in">Thế giới</span>
       <h1 class="page-title fade-in fade-in-delay-1">Thế giới</h1>
       <div class="divider fade-in fade-in-delay-2"></div>
       <p class="page-lead fade-in fade-in-delay-2">
-        Một lục địa tan vỡ được níu giữ bởi nền hòa bình mong manh. Khám phá các vùng đất, phe phái và lịch sử bị chôn vùi dẫn dắt biên niên sử.
+        Tư liệu thế giới đang được hoàn thiện.
       </p>
     </div>
   </section>
@@ -20,8 +20,8 @@ import { regions, lore } from '../data/world';
   <!-- Regions -->
   <section class="section">
     <div class="container">
-      <SectionHeader eyebrow="Địa lý" title="Các vùng đất" subtitle="Từ miệng vực Old Aethel đến những thánh đường kết tinh muối của Giáo hội, mỗi vùng đất đều giữ một phần sự thật và một lý do để che giấu nó." />
-      <div class="region-list">
+      <SectionHeader eyebrow="Địa lý" title="Các vùng đất" subtitle="Thông tin chính thức sẽ được bổ sung sau khi dữ liệu canon được duyệt." />
+      {regions.length > 0 ? <div class="region-list">
         {regions.map((r, i) => (
           <article class:list={['region-card', `region-${i % 2 === 0 ? 'left' : 'right'}`]} id={r.id}>
             <div class="region-image">
@@ -39,15 +39,15 @@ import { regions, lore } from '../data/world';
             </div>
           </article>
         ))}
-      </div>
+      </div> : <div class="timeline-empty empty-visual"><p>Tư liệu thế giới đang được hoàn thiện.</p></div>}
     </div>
   </section>
 
   <!-- Lore -->
   <section class="section section-alt">
     <div class="container">
-      <SectionHeader eyebrow="Những truyền thuyết sâu xa" title="Nền móng của sự sụp đổ" subtitle="Lịch sử, phép thuật và những liên minh bất ổn định hình từng chương của biên niên sử." />
-      <div class="lore-grid">
+      <SectionHeader eyebrow="Tư liệu nền" title="Nội dung thế giới" subtitle="Thông tin chính thức sẽ được bổ sung khi dữ liệu canon được hoàn thiện." />
+      {lore.length > 0 ? <div class="lore-grid">
         {lore.map((entry) => (
           <article class="lore-card">
             <div class="lore-icon">
@@ -61,7 +61,7 @@ import { regions, lore } from '../data/world';
             <p class="lore-body">{entry.body}</p>
           </article>
         ))}
-      </div>
+      </div> : <div class="timeline-empty empty-visual"><p>Tư liệu thế giới đang được hoàn thiện.</p></div>}
     </div>
   </section>
 
@@ -78,25 +78,7 @@ import { regions, lore } from '../data/world';
   <!-- Factions summary -->
   <section class="section">
     <div class="container container-narrow">
-      <SectionHeader eyebrow="Các thế lực" title="Tổng quan các phe phái" align="center" />
-      <div class="faction-list">
-        <div class="faction-item">
-          <h3>Church of Aethel</h3>
-          <p>Một tổ chức thần quyền dạy rằng sự sụp đổ là phán xét. Giáo hội kiểm soát Saltwatch và phái các Collector thu hồi hoặc hủy diệt mọi thứ chạm vào dấu ấn.</p>
-        </div>
-        <div class="faction-item">
-          <h3>Veranthor Accord</h3>
-          <p>Một liên minh mong manh của học giả, quý tộc và Free Companies đặt căn cứ tại thành bang ven biển. Đây là thứ gần với một chính quyền nhất, và cũng gần với một âm mưu nhất, mà cõi giới có được.</p>
-        </div>
-        <div class="faction-item">
-          <h3>Free Companies</h3>
-          <p>Những người lính giải ngũ hiện đồn trú tại Iron Marches. Họ thề phục vụ cả đời, được trả bằng những mảnh đất sẽ không bao giờ canh tác, và là những người duy nhất từng thấy thứ bước ra khỏi Hollow.</p>
-        </div>
-        <div class="faction-item">
-          <h3>Hollow Crown</h3>
-          <p>Không phải một phe phái mà là một thế lực, bất kể thứ gì đang ngủ bên dưới miệng vực Old Aethel. Nó không có quân đội cũng không có tiếng nói người sống nghe được. Dấu ấn đáp lại nó.</p>
-        </div>
-      </div>
+      <SectionHeader eyebrow="Các thế lực" title="Phe phái sẽ được bổ sung sau" subtitle="Thông tin phe phái chưa được công bố." align="center" />
     </div>
   </section>
 </Layout>

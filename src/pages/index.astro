@@ -30,23 +30,12 @@ const featuredCharacters = characters.slice(0, 3);
     </div>
   </section>
 
-  <!-- Giới thiệu thế giới -->
+  <!-- Thế giới -->
   <section class="section">
     <div class="container-narrow">
-      <SectionHeader eyebrow="Giới thiệu thế giới" title="Một cõi giới tan vỡ" />
+      <SectionHeader eyebrow="Thế giới" title="Thế giới của OAK đang được xây dựng" />
       <div class="story-text">
-        <p class="lead">
-          Vương quốc Aethel đã tồn tại suốt chín thế kỷ, một vương miện của đá và ánh sáng giữa thế giới đã biết. Chỉ trong một đêm, nơi ấy sụp đổ. Bầu trời chuyển màu bầm tím, mặt đất mở ra và thành phố chìm vào bóng tối. Không đội quân nào phá được tường thành. Không ngọn lửa nào chạm tới những ngọn tháp. Nó chỉ đơn giản là biến mất.
-        </p>
-        <p>
-          Ba năm sau, cõi giới là một mảnh ghép của những người sống sót. Giáo hội Aethel rao giảng rằng sự sụp đổ là một phán xét và cấm mọi người bước vào miệng vực còn lại. Các Free Companies giữ vùng biên cương băng giá và không nói về điều họ đã thấy. Tại thành bang tự do Veranthor, các học giả lặng lẽ nghiên cứu thứ duy nhất Giáo hội không thể chôn vùi: một dấu ấn xuất hiện trên cổ tay mọi người lính có mặt khi Aethel chìm xuống.
-        </p>
-        <p>
-          Mọi người lính mang dấu ấn ấy đều đã chết. Ngoại trừ một người.
-        </p>
-        <p>
-          Tên anh là Kael Dunreth. Anh không nhớ trận chiến, không còn quân hàm và cũng không muốn bị tìm thấy. Nhưng dấu ấn trên cổ tay đang nóng dần, còn những thứ bên dưới Hollow bắt đầu cựa mình. <em>Aetherbound</em> là câu chuyện về một người lính bị lãng quên, một học giả kiên nhẫn và một kẻ mang lời thề đã vỡ, cùng câu hỏi mà cả cõi giới đều sợ phải trả lời: <em>Vương miện thực sự được dựng lên để kìm giữ điều gì?</em>
-        </p>
+        <p class="lead">Những vùng đất, con người, lịch sử và xung đột của thế giới sẽ được bổ sung tại đây khi dữ liệu canon được hoàn thiện.</p>
       </div>
     </div>
   </section>
@@ -55,14 +44,18 @@ const featuredCharacters = characters.slice(0, 3);
   <section class="section">
     <div class="container">
       <SectionHeader eyebrow="Nhân vật nổi bật" title="Những người bước vào câu chuyện" subtitle="Những lựa chọn của họ sẽ hàn gắn cõi giới hoặc hoàn tất sự diệt vong." />
-      <div class="char-preview-grid">
-        {featuredCharacters.map((c) => (
-          <CharacterCard character={c} />
-        ))}
-      </div>
-      <div class="see-all">
-        <a href="/characters" class="btn btn-outline">Xem tất cả nhân vật &rarr;</a>
-      </div>
+      {featuredCharacters.length > 0 ? (
+        <>
+          <div class="char-preview-grid">
+            {featuredCharacters.map((c) => <CharacterCard character={c} />)}
+          </div>
+          <div class="see-all">
+            <a href="/characters" class="btn btn-outline">Xem tất cả nhân vật &rarr;</a>
+          </div>
+        </>
+      ) : (
+        <div class="home-empty-state empty-visual"><p>Thông tin nhân vật đang được cập nhật.</p></div>
+      )}
     </div>
   </section>
 
@@ -70,22 +63,28 @@ const featuredCharacters = characters.slice(0, 3);
   <section class="section section-alt">
     <div class="container">
       <SectionHeader eyebrow="Truyện mới" title="Mới nhất từ biên niên sử" subtitle="Những phần mới nhất của truyện dài kỳ, được cập nhật hằng tuần." />
-      <div class="chapter-preview-grid">
-        {latestChapters.map((ch) => (
-          <a href="/web-novel" class="chapter-card">
-            <div class="chapter-card-top">
-              <span class="chapter-num">Ch. {ch.number}</span>
-              <span class="chapter-date">{new Date(ch.date).toLocaleDateString('vi-VN', { month: 'short', day: 'numeric' })}</span>
-            </div>
-            <h3 class="chapter-title">{ch.title}</h3>
-            <p class="chapter-excerpt">{ch.excerpt}</p>
-            <span class="chapter-meta">{ch.arc}</span>
-          </a>
-        ))}
-      </div>
-      <div class="see-all">
-        <a href="/web-novel" class="btn btn-outline">Xem tất cả chương &rarr;</a>
-      </div>
+      {latestChapters.length > 0 ? (
+        <>
+          <div class="chapter-preview-grid">
+            {latestChapters.map((ch) => (
+              <a href="/web-novel" class="chapter-card">
+                <div class="chapter-card-top">
+                  <span class="chapter-num">Chương {ch.number}</span>
+                  <span class="chapter-date">{new Date(ch.date).toLocaleDateString('vi-VN', { month: 'short', day: 'numeric' })}</span>
+                </div>
+                <h3 class="chapter-title">{ch.title}</h3>
+                <p class="chapter-excerpt">{ch.excerpt}</p>
+                <span class="chapter-meta">{ch.arc}</span>
+              </a>
+            ))}
+          </div>
+          <div class="see-all">
+            <a href="/web-novel" class="btn btn-outline">Xem tất cả chương &rarr;</a>
+          </div>
+        </>
+      ) : (
+        <div class="home-empty-state empty-visual"><p>Nội dung truyện đang được chuẩn bị.</p></div>
+      )}
     </div>
   </section>
 
@@ -99,26 +98,15 @@ const featuredCharacters = characters.slice(0, 3);
     </div>
   </section>
 
-  <!-- Tiến độ phát triển -->
-  <section class="section section-alt">
-    <div class="container container-narrow">
-      <SectionHeader eyebrow="Tiến độ phát triển" title="Dự án đang thành hình" subtitle="Ghi chú và các cột mốc phát triển sẽ được tập hợp tại đây." align="center" />
-      <div class="development-note">
-        <p>Công việc hiện tại tập trung vào việc xây dựng nền tảng thế giới, câu chuyện, nhân vật, hình ảnh và các phần liên quan đến game.</p>
-        <a href="/project" class="btn btn-outline">Xem dự án</a>
-      </div>
-    </div>
-  </section>
-
   <!-- Support CTA -->
   <section class="art-cta-section">
     <div class="container">
       <div class="art-cta">
         <div class="art-cta-text">
           <span class="eyebrow">Đồng hành cùng OAK</span>
-          <h2>Tiếp tục xây dựng thế giới</h2>
-          <p>Nếu bạn yêu thích thế giới này, sự ủng hộ của bạn sẽ giúp OAK tiếp tục được phát triển và hoàn thiện về nội dung, hình ảnh và các phần liên quan đến game.</p>
-          <a href="/support" class="btn btn-primary">Đồng hành cùng OAK</a>
+          <h2>Giúp OAK tiếp tục được xây dựng</h2>
+          <p>Mỗi sự ủng hộ đều giúp tôi có thêm thời gian và nguồn lực để tiếp tục hoàn thiện thế giới, câu chuyện, hình ảnh và các phần tiếp theo của dự án.</p>
+          <a href="/support" class="btn btn-primary">Ủng hộ OAK</a>
         </div>
       </div>
     </div>
