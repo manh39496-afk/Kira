@@ -1,6 +1,6 @@
 ---
 import { site } from '../data/site';
-const { primaryNav, secondaryNav, title, author } = site;
+const { primaryNav, secondaryNav, title } = site;
 const year = new Date().getFullYear();
 ---
 
@@ -9,7 +9,7 @@ const year = new Date().getFullYear();
     <div class="footer-grid">
       <div class="footer-brand">
         <span class="footer-title">{title}</span>
-        <span class="footer-author">Written & illustrated by {author}</span>
+        <span class="footer-author">Fantasy world, story, art, and development project</span>
       </div>
       <nav class="footer-nav" aria-label="Primary footer navigation">
         {primaryNav.map((item) => (
@@ -19,7 +19,7 @@ const year = new Date().getFullYear();
     </div>
     <div class="footer-bottom">
       <p>&copy; {year} {title}. All rights reserved.</p>
-      <p class="footer-credit">A work of fiction. Names, characters, and places are products of the author's imagination.</p>
+      <p class="footer-credit">Project information and materials are being developed for this ecosystem.</p>
     </div>
     <nav class="footer-secondary" aria-label="Secondary navigation">
       {secondaryNav.map((item) => (

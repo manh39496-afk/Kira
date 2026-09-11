@@ -25,8 +25,11 @@ import { characters } from '../data/characters';
             id={c.id}
           >
             <div class="char-portrait-wrap">
-              <img src={c.portrait} alt={c.portraitAlt} loading="lazy" />
-              <div class="char-portrait-overlay" style={`background: linear-gradient(135deg, ${c.accent}22, transparent)`}></div>
+              {c.portrait ? (
+                <img src={c.portrait} alt={c.portraitAlt ?? ''} loading="lazy" />
+              ) : (
+                <span class="empty-visual">Visual pending</span>
+              )}
             </div>
             <div class="char-info">
               <span class="char-faction">{c.faction}</span>
@@ -101,21 +104,11 @@ import { characters } from '../data/characters';
     box-shadow: var(--shadow-md);
   }
 
-  .char-portrait-wrap img {
+  .char-portrait-wrap img,
+  .char-portrait-wrap .empty-visual {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
-  }
-
-  .char-profile:hover .char-portrait-wrap img {
-    transform: scale(1.04);
-  }
-
-  .char-portrait-overlay {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
   }
 
   .char-info {

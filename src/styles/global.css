@@ -129,6 +129,21 @@ button {
   transform: translateY(0);
 }
 
+.empty-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  color: var(--color-ink-muted);
+  background: var(--color-bg-alt);
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .container {
   width: 100%;
   max-width: var(--max-width);
