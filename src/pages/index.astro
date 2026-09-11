@@ -19,8 +19,8 @@ const featuredCharacters = characters.slice(0, 3);
       <p class="hero-subtitle fade-in fade-in-delay-2">{site.subtitle}</p>
       <p class="hero-desc fade-in fade-in-delay-3">{site.description}</p>
       <div class="hero-actions fade-in fade-in-delay-3">
-        <a href="/web-novel" class="btn btn-primary">Begin Reading</a>
-        <a href="/world" class="btn btn-ghost">Explore the World</a>
+        <a href="/world" class="btn btn-primary">Explore the World</a>
+        <a href="/web-novel" class="btn btn-ghost">Read the Story</a>
       </div>
     </div>
     <div class="hero-scroll fade-in fade-in-delay-3">
@@ -29,10 +29,10 @@ const featuredCharacters = characters.slice(0, 3);
     </div>
   </section>
 
-  <!-- Story Intro -->
+  <!-- World Introduction -->
   <section class="section">
     <div class="container-narrow">
-      <SectionHeader eyebrow="The Chronicle" title="A Realm Fractured" />
+      <SectionHeader eyebrow="World Introduction" title="A Realm Fractured" />
       <div class="story-text">
         <p class="lead">
           The kingdom of Aethel stood for nine centuries — a crown of stone and light at the heart of the
@@ -61,29 +61,6 @@ const featuredCharacters = characters.slice(0, 3);
     </div>
   </section>
 
-  <!-- Latest Chapters -->
-  <section class="section section-alt">
-    <div class="container">
-      <SectionHeader eyebrow="Recent Chapters" title="Latest from the Chronicle" subtitle="The newest installments of the web novel, updated weekly." />
-      <div class="chapter-preview-grid">
-        {latestChapters.map((ch) => (
-          <a href="/web-novel" class="chapter-card">
-            <div class="chapter-card-top">
-              <span class="chapter-num">Ch. {ch.number}</span>
-              <span class="chapter-date">{new Date(ch.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
-            </div>
-            <h3 class="chapter-title">{ch.title}</h3>
-            <p class="chapter-excerpt">{ch.excerpt}</p>
-            <span class="chapter-meta">{ch.arc}</span>
-          </a>
-        ))}
-      </div>
-      <div class="see-all">
-        <a href="/web-novel" class="btn btn-outline">All Chapters &rarr;</a>
-      </div>
-    </div>
-  </section>
-
   <!-- Featured Characters -->
   <section class="section">
     <div class="container">
@@ -107,15 +84,59 @@ const featuredCharacters = characters.slice(0, 3);
     </div>
   </section>
 
-  <!-- Art CTA -->
+  <!-- Latest Story -->
+  <section class="section section-alt">
+    <div class="container">
+      <SectionHeader eyebrow="Latest Story" title="Latest from the Chronicle" subtitle="The newest installments of the web novel, updated weekly." />
+      <div class="chapter-preview-grid">
+        {latestChapters.map((ch) => (
+          <a href="/web-novel" class="chapter-card">
+            <div class="chapter-card-top">
+              <span class="chapter-num">Ch. {ch.number}</span>
+              <span class="chapter-date">{new Date(ch.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+            </div>
+            <h3 class="chapter-title">{ch.title}</h3>
+            <p class="chapter-excerpt">{ch.excerpt}</p>
+            <span class="chapter-meta">{ch.arc}</span>
+          </a>
+        ))}
+      </div>
+      <div class="see-all">
+        <a href="/web-novel" class="btn btn-outline">All Chapters &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Artwork -->
+  <section class="section">
+    <div class="container">
+      <SectionHeader eyebrow="Featured Artwork" title="A Visual Archive in Progress" subtitle="Approved project artwork will appear here as it is added." />
+      <div class="home-empty-state empty-visual">
+        <p>Project artwork has not yet been added.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Development Update -->
+  <section class="section section-alt">
+    <div class="container container-narrow">
+      <SectionHeader eyebrow="Development Update" title="The Project in Progress" subtitle="Development notes and milestones will be collected here as the ecosystem takes shape." align="center" />
+      <div class="development-note">
+        <p>Current work is focused on establishing the world, story, character, art, and development foundations for the SRPG project.</p>
+        <a href="/project" class="btn btn-outline">View the Project</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Support CTA -->
   <section class="art-cta-section">
     <div class="container">
       <div class="art-cta">
         <div class="art-cta-text">
-          <span class="eyebrow">Artist Portfolio</span>
-          <h2>Visions of the Shattered Realm</h2>
-          <p>Character concepts, environment key art, and scene studies from the world of Aetherbound — the visual companion to the chronicle.</p>
-          <a href="/art" class="btn btn-primary">View the Gallery</a>
+          <span class="eyebrow">Support the Project</span>
+          <h2>Help the World Grow</h2>
+          <p>Voluntary support helps sustain continued work on the SRPG world, stories, art, and development.</p>
+          <a href="/support" class="btn btn-primary">Support the Project</a>
         </div>
       </div>
     </div>
@@ -402,6 +423,12 @@ const featuredCharacters = characters.slice(0, 3);
     height: 100%;
   }
 
+  .home-empty-state {
+    min-height: 220px;
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-md);
+  }
+
   .char-card-body {
     padding: 16px 20px 20px;
     display: flex;
@@ -424,6 +451,21 @@ const featuredCharacters = characters.slice(0, 3);
   .see-all {
     text-align: center;
     margin-top: 40px;
+  }
+
+  .development-note {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 28px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-soft);
+    border-left: 3px solid var(--color-gold);
+  }
+
+  .development-note p {
+    max-width: 600px;
   }
 
   /* Art CTA */
@@ -485,5 +527,6 @@ const featuredCharacters = characters.slice(0, 3);
     .hero-actions { flex-direction: column; }
     .hero-actions .btn { width: 100%; justify-content: center; }
     .chapter-card { padding: 20px; }
+    .development-note { flex-direction: column; align-items: flex-start; }
   }
 </style>
