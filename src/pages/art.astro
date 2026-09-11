@@ -2,14 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Art" description="The visual archive for the SRPG project, including character art, world art, illustrations, and development work.">
+<Layout title="Hình ảnh" description="Kho tư liệu hình ảnh của dự án, gồm hình nhân vật, thế giới, minh họa và quá trình phát triển.">
   <section class="page-hero">
     <div class="container">
-      <span class="eyebrow fade-in">Visual Archive</span>
-      <h1 class="page-title fade-in fade-in-delay-1">Art Gallery</h1>
+      <span class="eyebrow fade-in">Kho hình ảnh</span>
+      <h1 class="page-title fade-in fade-in-delay-1">Hình ảnh</h1>
       <div class="divider fade-in fade-in-delay-2"></div>
       <p class="page-lead fade-in fade-in-delay-2">
-        Approved project artwork will be added here as the visual archive develops.
+        Tư liệu hình ảnh được duyệt sẽ được bổ sung khi kho hình ảnh được hoàn thiện.
       </p>
     </div>
   </section>
@@ -17,11 +17,11 @@ import Layout from '../layouts/Layout.astro';
   <section class="section">
     <div class="container">
       <div class="art-hub-grid">
-        {['Character Art', 'World Art', 'Illustrations', 'Development Art'].map((category) => (
+        {['Hình nhân vật', 'Hình thế giới', 'Minh họa', 'Hình phát triển'].map((category) => (
           <article class="art-channel">
-            <div class="art-channel-visual empty-visual">Visual pending</div>
+            <div class="art-channel-visual empty-visual">Hình ảnh đang được hoàn thiện</div>
             <h2>{category}</h2>
-            <p>Approved project work for this collection has not yet been added.</p>
+            <p>Tư liệu được duyệt cho bộ sưu tập này chưa được bổ sung.</p>
           </article>
         ))}
       </div>

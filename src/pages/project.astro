@@ -4,36 +4,36 @@ import SectionHeader from '../components/SectionHeader.astro';
 
 const projectSections = [
   {
-    eyebrow: 'Development Notes',
-    title: 'Notes will be collected here',
-    text: 'A focused place for project updates, decisions, and progress notes as development continues.',
+    eyebrow: 'Ghi chú phát triển',
+    title: 'Ghi chú sẽ được tập hợp tại đây',
+    text: 'Nơi tập trung các cập nhật, quyết định và ghi chú tiến độ của dự án trong quá trình phát triển.',
   },
   {
-    eyebrow: 'Process',
-    title: 'A workspace for the making of the project',
-    text: 'The project process will be documented here without exposing internal governance or canon machinery.',
+    eyebrow: 'Quy trình',
+    title: 'Không gian xây dựng dự án',
+    text: 'Quy trình thực hiện dự án sẽ được ghi lại tại đây mà không công khai cơ chế nội bộ hay nội dung canon chưa được duyệt.',
   },
   {
-    eyebrow: 'Milestones',
-    title: 'Milestones are in progress',
-    text: 'Approved milestones will be added as the development roadmap becomes ready to share.',
+    eyebrow: 'Cột mốc',
+    title: 'Các cột mốc đang được hoàn thiện',
+    text: 'Các cột mốc được duyệt sẽ được bổ sung khi lộ trình phát triển sẵn sàng để chia sẻ.',
   },
   {
-    eyebrow: 'Behind the Scenes',
-    title: 'Development material pending',
-    text: 'Selected behind-the-scenes material can be added here as it is approved for publication.',
+    eyebrow: 'Hậu trường',
+    title: 'Tư liệu phát triển đang chờ bổ sung',
+    text: 'Tư liệu hậu trường được chọn có thể được thêm vào đây khi được duyệt để công bố.',
   },
 ];
 ---
 
-<Layout title="Project" description="Development notes, process, milestones, and progress for the SRPG project.">
+<Layout title="Dự án" description="Ghi chú phát triển, quy trình, cột mốc và tiến độ của dự án.">
   <section class="page-hero">
     <div class="container">
-      <span class="eyebrow fade-in">Project</span>
-      <h1 class="page-title fade-in fade-in-delay-1">Project Progress</h1>
+      <span class="eyebrow fade-in">Dự án</span>
+      <h1 class="page-title fade-in fade-in-delay-1">Tiến độ dự án</h1>
       <div class="divider fade-in fade-in-delay-2"></div>
       <p class="page-lead fade-in fade-in-delay-2">
-        Follow the development of the fantasy world, stories, characters, art, and SRPG ecosystem.
+        Theo dõi quá trình phát triển thế giới giả tưởng, câu chuyện, nhân vật, hình ảnh và các phần liên quan đến game.
       </p>
     </div>
   </section>
@@ -54,9 +54,9 @@ const projectSections = [
 
   <section class="section section-alt">
     <div class="container container-narrow">
-      <SectionHeader eyebrow="Current Progress" title="The project is taking shape" subtitle="This progress view will grow with approved development updates." align="center" />
+      <SectionHeader eyebrow="Tiến độ hiện tại" title="Dự án đang thành hình" subtitle="Tổng quan tiến độ sẽ được mở rộng cùng các cập nhật phát triển được duyệt." align="center" />
       <div class="progress-empty empty-visual">
-        <p>Current progress details have not yet been added.</p>
+        <p>Chi tiết tiến độ hiện tại đang được hoàn thiện.</p>
       </div>
     </div>
   </section>

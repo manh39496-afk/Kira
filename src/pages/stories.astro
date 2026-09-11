@@ -7,35 +7,35 @@ const publishedChapters = chapters.filter((chapter) => chapter.status === 'publi
 const arcs = [...new Set(chapters.map((chapter) => chapter.arc))];
 ---
 
-<Layout title="Stories" description="Explore the story archive, arcs, and available chapters of the SRPG web novel project.">
+<Layout title="Truyện" description="Khám phá kho truyện, các hồi và những chương đã có của dự án truyện dài kỳ.">
   <section class="page-hero">
     <div class="container">
-      <span class="eyebrow fade-in">Story Archive</span>
-      <h1 class="page-title fade-in fade-in-delay-1">Stories</h1>
+      <span class="eyebrow fade-in">Kho truyện</span>
+      <h1 class="page-title fade-in fade-in-delay-1">Truyện</h1>
       <div class="divider fade-in fade-in-delay-2"></div>
       <p class="page-lead fade-in fade-in-delay-2">
-        Follow the project story archive from its published chapters to the arcs still in development.
+        Theo dõi kho truyện của dự án, từ những chương đã xuất bản đến các hồi vẫn đang được phát triển.
       </p>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <SectionHeader eyebrow="Main Story" title="The Web Novel" subtitle="Read the serialized chapter archive and follow each story arc in order." />
+      <SectionHeader eyebrow="Câu chuyện chính" title="Truyện dài kỳ" subtitle="Đọc kho chương được đăng tải theo kỳ và theo dõi từng hồi theo thứ tự." />
       <div class="story-hub-grid">
         <div class="story-hub-panel">
-          <span class="eyebrow">Current Archive</span>
-          <strong>{publishedChapters.length} published chapters</strong>
-          <span>{arcs.length} story arcs</span>
+          <span class="eyebrow">Kho hiện tại</span>
+          <strong>{publishedChapters.length} chương đã xuất bản</strong>
+          <span>{arcs.length} hồi truyện</span>
         </div>
-        <a class="btn btn-primary story-hub-action" href="/web-novel">Open Chapter Index</a>
+        <a class="btn btn-primary story-hub-action" href="/web-novel">Mở danh sách chương</a>
       </div>
     </div>
   </section>
 
   <section class="section section-alt">
     <div class="container container-narrow">
-      <SectionHeader eyebrow="Story Arcs" title="Read in Sequence" align="center" />
+      <SectionHeader eyebrow="Các hồi truyện" title="Đọc theo trình tự" align="center" />
       <div class="arc-list">
         {arcs.map((arc, index) => (
           <a class="arc-link" href="/web-novel">

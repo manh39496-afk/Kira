@@ -9,19 +9,19 @@ const year = new Date().getFullYear();
     <div class="footer-grid">
       <div class="footer-brand">
         <span class="footer-title">{title}</span>
-        <span class="footer-author">Fantasy world, story, art, and development project</span>
+        <span class="footer-author">Thế giới, câu chuyện, hình ảnh và dự án phát triển</span>
       </div>
-      <nav class="footer-nav" aria-label="Primary footer navigation">
+      <nav class="footer-nav" aria-label="Điều hướng chân trang chính">
         {primaryNav.map((item) => (
           <a href={item.href}>{item.label}</a>
         ))}
       </nav>
     </div>
     <div class="footer-bottom">
-      <p>&copy; {year} {title}. All rights reserved.</p>
-      <p class="footer-credit">Project information and materials are being developed for this ecosystem.</p>
+      <p>&copy; {year} {title}. Bảo lưu mọi quyền.</p>
+      <p class="footer-credit">Thông tin và tư liệu của dự án đang được hoàn thiện.</p>
     </div>
-    <nav class="footer-secondary" aria-label="Secondary navigation">
+    <nav class="footer-secondary" aria-label="Điều hướng phụ">
       {secondaryNav.map((item) => (
         <a href={item.href}>{item.label}</a>
       ))}

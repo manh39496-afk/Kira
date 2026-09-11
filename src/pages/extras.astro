@@ -9,40 +9,40 @@ const extras = [
     text: 'A tertiary story space for approved KIRA STORY material.',
   },
   {
-    label: 'Side Stories',
-    title: 'Side Stories',
-    text: 'Additional story material can be added here when it is ready to share.',
+    label: 'Truyện bên lề',
+    title: 'Truyện bên lề',
+    text: 'Các tư liệu truyện bổ sung có thể được thêm vào đây khi sẵn sàng để chia sẻ.',
   },
   {
-    label: 'Experimental',
-    title: 'Experimental Content',
-    text: 'A separate space for experiments and non-core material approved for publication.',
+    label: 'Thử nghiệm',
+    title: 'Nội dung thử nghiệm',
+    text: 'Không gian riêng cho các thử nghiệm và tư liệu ngoài nội dung chính đã được duyệt để công bố.',
   },
 ];
 ---
 
-<Layout title="Extras" description="Side stories, KIRA STORY, and experimental material for the SRPG project.">
+<Layout title="Nội dung thêm" description="Truyện bên lề, KIRA STORY và tư liệu thử nghiệm của dự án.">
   <section class="page-hero">
     <div class="container">
-      <span class="eyebrow fade-in">Secondary Archive</span>
-      <h1 class="page-title fade-in fade-in-delay-1">Extras</h1>
+      <span class="eyebrow fade-in">Kho phụ</span>
+      <h1 class="page-title fade-in fade-in-delay-1">Nội dung thêm</h1>
       <div class="divider fade-in fade-in-delay-2"></div>
       <p class="page-lead fade-in fade-in-delay-2">
-        A lower-priority archive for side stories, KIRA STORY, and experimental material.
+        Kho lưu trữ bổ sung cho truyện bên lề, KIRA STORY và tư liệu thử nghiệm.
       </p>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <SectionHeader eyebrow="Additional Material" title="Beyond the Core Archive" subtitle="These collections remain separate from the primary world, story, character, and art navigation." />
+      <SectionHeader eyebrow="Tư liệu bổ sung" title="Ngoài kho chính" subtitle="Các bộ sưu tập này được giữ riêng với nội dung chính về thế giới, truyện, nhân vật và hình ảnh." />
       <div class="extras-grid">
         {extras.map((extra) => (
           <article class="extras-card">
             <span class="eyebrow">{extra.label}</span>
             <h2>{extra.title}</h2>
             <p>{extra.text}</p>
-            <div class="extras-empty empty-visual">Content pending</div>
+            <div class="extras-empty empty-visual">Nội dung đang được hoàn thiện</div>
           </article>
         ))}
       </div>
