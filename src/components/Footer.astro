@@ -1,0 +1,107 @@
+---
+import { site } from '../data/site';
+const { nav, title, author } = site;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="footer-title">{title}</span>
+        <span class="footer-author">Written & illustrated by {author}</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        {nav.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; {year} {title}. All rights reserved.</p>
+      <p class="footer-credit">A work of fiction. Names, characters, and places are products of the author's imagination.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-footer-bg);
+    color: #c4b8a8;
+    padding: 56px 0 32px;
+    margin-top: auto;
+  }
+
+  .footer-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .footer-title {
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #f7f3ec;
+  }
+
+  .footer-author {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: #9a8d7d;
+    letter-spacing: 0.04em;
+  }
+
+  .footer-nav {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-nav a {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #c4b8a8;
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+
+  .footer-nav a:hover {
+    color: var(--color-gold);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid #3d3530;
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .footer-bottom p {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    color: #8a7d6d;
+    line-height: 1.5;
+  }
+
+  .footer-credit {
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .footer-grid {
+      flex-direction: column;
+      gap: 24px;
+    }
+  }
+</style>

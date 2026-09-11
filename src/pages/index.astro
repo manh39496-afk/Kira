@@ -1,0 +1,507 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import { site } from '../data/site';
+import { heroImage, heroImageAlt } from '../data/site';
+import { chapters } from '../data/chapters';
+import { characters } from '../data/characters';
+
+const latestChapters = chapters.filter((c) => c.status === 'published').slice(-3);
+const featuredCharacters = characters.slice(0, 3);
+---
+
+<Layout>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <img src={heroImage} alt={heroImageAlt} class="hero-bg" fetchpriority="high" />
+    <div class="hero-content container">
+      <span class="hero-eyebrow fade-in">{site.tagline}</span>
+      <h1 class="hero-title fade-in fade-in-delay-1">{site.title}</h1>
+      <p class="hero-subtitle fade-in fade-in-delay-2">{site.subtitle}</p>
+      <p class="hero-desc fade-in fade-in-delay-3">{site.description}</p>
+      <div class="hero-actions fade-in fade-in-delay-3">
+        <a href="/web-novel" class="btn btn-primary">Begin Reading</a>
+        <a href="/world" class="btn btn-ghost">Explore the World</a>
+      </div>
+    </div>
+    <div class="hero-scroll fade-in fade-in-delay-3">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Story Intro -->
+  <section class="section">
+    <div class="container-narrow">
+      <SectionHeader eyebrow="The Chronicle" title="A Realm Fractured" />
+      <div class="story-text">
+        <p class="lead">
+          The kingdom of Aethel stood for nine centuries — a crown of stone and light at the heart of the
+          known world. In a single night, it fell. The sky turned the color of a bruise, the ground opened,
+          and the city sank into the dark. No army breached its walls. No fire touched its spires. It was
+          simply gone.
+        </p>
+        <p>
+          Three years later, the realm is a patchwork of survivors. The Church of Aethel preaches that the
+          Fall was a judgement and forbids any to enter the crater it left behind. The Free Companies hold
+          the frozen borderlands and do not speak of what they saw. And in the free city of Veranthor,
+          scholars quietly study the one thing the Church could not bury: a sigil that appeared on the
+          wrist of every soldier in the field the night Aethel sank.
+        </p>
+        <p>
+          Every soldier who bore it is dead. Except one.
+        </p>
+        <p>
+          His name is Kael Dunreth. He has no memory of the battle, no rank, and no desire to be found. But
+          the sigil on his wrist is growing warmer, and the things beneath the Hollow are beginning to
+          stir. <em>Aetherbound</em> is the story of a forgotten soldier, a patient scholar, and a broken
+          oath-bearer — and of the question the whole realm is afraid to answer: <em>what was the Crown
+          really built to keep down?</em>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Chapters -->
+  <section class="section section-alt">
+    <div class="container">
+      <SectionHeader eyebrow="Recent Chapters" title="Latest from the Chronicle" subtitle="The newest installments of the web novel, updated weekly." />
+      <div class="chapter-preview-grid">
+        {latestChapters.map((ch) => (
+          <a href="/web-novel" class="chapter-card">
+            <div class="chapter-card-top">
+              <span class="chapter-num">Ch. {ch.number}</span>
+              <span class="chapter-date">{new Date(ch.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+            </div>
+            <h3 class="chapter-title">{ch.title}</h3>
+            <p class="chapter-excerpt">{ch.excerpt}</p>
+            <span class="chapter-meta">{ch.arc}</span>
+          </a>
+        ))}
+      </div>
+      <div class="see-all">
+        <a href="/web-novel" class="btn btn-outline">All Chapters &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Characters -->
+  <section class="section">
+    <div class="container">
+      <SectionHeader eyebrow="Dramatis Personae" title="Who Walks the Story" subtitle="The figures whose choices will mend the realm or finish its ruin." />
+      <div class="char-preview-grid">
+        {featuredCharacters.map((c) => (
+          <a href="/characters" class="char-card" style={`--card-accent: ${c.accent}`}>
+            <div class="char-card-image">
+              <img src={c.portrait} alt={c.portraitAlt} loading="lazy" />
+            </div>
+            <div class="char-card-body">
+              <h3 class="char-name">{c.name}</h3>
+              <span class="char-title-text">{c.title}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+      <div class="see-all">
+        <a href="/characters" class="btn btn-outline">All Characters &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Art CTA -->
+  <section class="art-cta-section">
+    <div class="container">
+      <div class="art-cta">
+        <div class="art-cta-text">
+          <span class="eyebrow">Artist Portfolio</span>
+          <h2>Visions of the Shattered Realm</h2>
+          <p>Character concepts, environment key art, and scene studies from the world of Aetherbound — the visual companion to the chronicle.</p>
+          <a href="/art" class="btn btn-primary">View the Gallery</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Hero */
+  .hero {
+    position: relative;
+    height: 92vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(180deg, rgba(20, 16, 12, 0.5) 0%, rgba(20, 16, 12, 0.3) 40%, rgba(20, 16, 12, 0.75) 100%),
+      linear-gradient(90deg, rgba(20, 16, 12, 0.55) 0%, transparent 60%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 640px;
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-bottom: 16px;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-size: 4.5rem;
+    font-weight: 700;
+    color: #f7f3ec;
+    line-height: 1;
+    letter-spacing: 0.01em;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-size: 1.4rem;
+    font-style: italic;
+    color: #e8d8c4;
+    margin-bottom: 24px;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: #d4c8b8;
+    line-height: 1.7;
+    margin-bottom: 32px;
+    max-width: 520px;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(247, 243, 236, 0.5);
+  }
+
+  .hero-scroll span {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(247, 243, 236, 0.4), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 28px;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition);
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: var(--color-primary);
+    color: #f7f3ec;
+    border: 1px solid var(--color-primary);
+  }
+
+  .btn-primary:hover {
+    background: var(--color-primary-dark);
+    color: #fff;
+    border-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .btn-ghost {
+    color: #e8d8c4;
+    border: 1px solid rgba(247, 243, 236, 0.35);
+    background: rgba(247, 243, 236, 0.05);
+  }
+
+  .btn-ghost:hover {
+    color: #fff;
+    border-color: rgba(247, 243, 236, 0.6);
+    background: rgba(247, 243, 236, 0.1);
+  }
+
+  .btn-outline {
+    color: var(--color-primary);
+    border: 1px solid var(--color-border);
+    background: transparent;
+  }
+
+  .btn-outline:hover {
+    color: var(--color-primary-dark);
+    border-color: var(--color-primary);
+    background: var(--color-bg-alt);
+  }
+
+  /* Story text */
+  .story-text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .story-text .lead {
+    font-size: 1.2rem;
+    color: var(--color-ink);
+    line-height: 1.7;
+  }
+
+  .story-text p {
+    color: var(--color-ink-soft);
+  }
+
+  .story-text em {
+    color: var(--color-primary);
+    font-style: italic;
+  }
+
+  /* Chapter preview grid */
+  .chapter-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .chapter-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 28px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  }
+
+  .chapter-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-gold);
+  }
+
+  .chapter-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .chapter-num {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    text-transform: uppercase;
+  }
+
+  .chapter-date {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    color: var(--color-ink-muted);
+  }
+
+  .chapter-title {
+    font-size: 1.15rem;
+    color: var(--color-ink);
+    line-height: 1.3;
+  }
+
+  .chapter-excerpt {
+    font-size: 0.88rem;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+    flex-grow: 1;
+  }
+
+  .chapter-meta {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--color-ink-muted);
+    padding-top: 8px;
+    border-top: 1px solid var(--color-border-soft);
+  }
+
+  /* Character preview grid */
+  .char-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .char-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-soft);
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+
+  .char-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .char-card-image {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    border-bottom: 3px solid var(--card-accent);
+  }
+
+  .char-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .char-card:hover .char-card-image img {
+    transform: scale(1.05);
+  }
+
+  .char-card-body {
+    padding: 16px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .char-name {
+    font-size: 1.1rem;
+    color: var(--color-ink);
+  }
+
+  .char-title-text {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    color: var(--color-ink-muted);
+    letter-spacing: 0.03em;
+  }
+
+  .see-all {
+    text-align: center;
+    margin-top: 40px;
+  }
+
+  /* Art CTA */
+  .art-cta-section {
+    padding: 80px 0;
+    background: var(--color-footer-bg);
+  }
+
+  .art-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .art-cta-text {
+    max-width: 560px;
+  }
+
+  .art-cta-text .eyebrow {
+    color: var(--color-gold);
+  }
+
+  .art-cta-text h2 {
+    color: #f7f3ec;
+    font-size: 2.2rem;
+    margin-bottom: 16px;
+  }
+
+  .art-cta-text p {
+    color: #c4b8a8;
+    font-size: 1.05rem;
+    margin-bottom: 28px;
+    line-height: 1.7;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .chapter-preview-grid, .char-preview-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero-title { font-size: 3rem; }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      height: 80vh;
+      min-height: 500px;
+    }
+    .hero-title { font-size: 2.5rem; }
+    .hero-subtitle { font-size: 1.1rem; }
+    .hero-desc { font-size: 0.95rem; }
+    .story-text .lead { font-size: 1.05rem; }
+    .art-cta-text h2 { font-size: 1.7rem; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title { font-size: 2rem; }
+    .hero-actions { flex-direction: column; }
+    .hero-actions .btn { width: 100%; justify-content: center; }
+    .chapter-card { padding: 20px; }
+  }
+</style>

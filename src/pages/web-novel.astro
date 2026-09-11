@@ -1,0 +1,315 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import { chapters } from '../data/chapters';
+
+const arcs = [...new Set(chapters.map((c) => c.arc))];
+const publishedCount = chapters.filter((c) => c.status === 'published').length;
+const totalWords = chapters.filter((c) => c.status === 'published').reduce((sum, c) => sum + c.wordCount, 0);
+---
+
+<Layout title="Web Novel" description="Read the chronicle of Aetherbound — chapters, arcs, and the unfolding story of the Shattered Realm.">
+  <!-- Page header -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow fade-in">The Chronicle</span>
+      <h1 class="page-title fade-in fade-in-delay-1">Web Novel</h1>
+      <div class="divider fade-in fade-in-delay-2"></div>
+      <p class="page-lead fade-in fade-in-delay-2">
+        The full text of <em>Aetherbound</em>, serialized chapter by chapter. New installments arrive weekly.
+      </p>
+      <div class="stats fade-in fade-in-delay-3">
+        <div class="stat">
+          <span class="stat-num">{publishedCount}</span>
+          <span class="stat-label">Chapters Published</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">{arcs.length}</span>
+          <span class="stat-label">Story Arcs</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">{(totalWords / 1000).toFixed(1)}k</span>
+          <span class="stat-label">Words Written</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chapter list by arc -->
+  <section class="section">
+    <div class="container">
+      {arcs.map((arc) => {
+        const arcChapters = chapters.filter((c) => c.arc === arc);
+        return (
+          <div class="arc-block">
+            <h2 class="arc-name">{arc}</h2>
+            <div class="chapter-list">
+              {arcChapters.map((ch) => (
+                <article class:list={['chapter-row', { upcoming: ch.status === 'upcoming' }]}>
+                  <div class="ch-number">
+                    <span class="ch-num-label">Ch.</span>
+                    <span class="ch-num-value">{String(ch.number).padStart(2, '0')}</span>
+                  </div>
+                  <div class="ch-body">
+                    <div class="ch-head">
+                      <h3 class="ch-name">{ch.title}</h3>
+                      {ch.status === 'upcoming' && <span class="ch-badge">Upcoming</span>}
+                    </div>
+                    <p class="ch-excerpt">{ch.excerpt}</p>
+                    <div class="ch-meta">
+                      <span>{new Date(ch.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                      {ch.wordCount > 0 && <span class="ch-dot">&middot;</span>}
+                      {ch.wordCount > 0 && <span>{ch.wordCount.toLocaleString()} words</span>}
+                    </div>
+                  </div>
+                  <div class="ch-action">
+                    {ch.status === 'published' ? (
+                      <a href="#" class="read-link">Read &rarr;</a>
+                    ) : (
+                      <span class="read-link disabled">Coming Soon</span>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    padding: 80px 0 48px;
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  .page-title {
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-size: 3rem;
+    color: var(--color-ink);
+    margin-bottom: 8px;
+  }
+
+  .page-lead {
+    font-size: 1.05rem;
+    color: var(--color-ink-soft);
+    max-width: 560px;
+    margin-bottom: 32px;
+  }
+
+  .page-lead em {
+    color: var(--color-primary);
+    font-style: italic;
+  }
+
+  .stats {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .stat-label {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+
+  /* Arc blocks */
+  .arc-block {
+    margin-bottom: 56px;
+  }
+
+  .arc-name {
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-size: 1.4rem;
+    color: var(--color-ink);
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid var(--color-gold);
+    display: inline-block;
+  }
+
+  .chapter-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .chapter-row {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 24px;
+    align-items: start;
+    padding: 24px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-md);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  }
+
+  .chapter-row:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--color-gold);
+  }
+
+  .chapter-row.upcoming {
+    opacity: 0.65;
+    background: var(--color-bg-alt);
+  }
+
+  .chapter-row.upcoming:hover {
+    transform: none;
+    border-color: var(--color-border);
+  }
+
+  .ch-number {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-sm);
+    min-width: 64px;
+  }
+
+  .chapter-row.upcoming .ch-number {
+    background: var(--color-border-soft);
+  }
+
+  .ch-num-label {
+    font-family: var(--font-sans);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+
+  .ch-num-value {
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1;
+  }
+
+  .ch-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ch-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .ch-name {
+    font-size: 1.15rem;
+    color: var(--color-ink);
+  }
+
+  .ch-badge {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+    background: var(--color-border-soft);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .ch-excerpt {
+    font-size: 0.9rem;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+  }
+
+  .ch-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    color: var(--color-ink-muted);
+  }
+
+  .ch-dot {
+    font-size: 0.5rem;
+  }
+
+  .ch-action {
+    display: flex;
+    align-items: center;
+    padding-top: 4px;
+  }
+
+  .read-link {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    white-space: nowrap;
+    transition: color var(--transition);
+  }
+
+  .read-link:hover {
+    color: var(--color-primary-dark);
+  }
+
+  .read-link.disabled {
+    color: var(--color-ink-muted);
+    cursor: default;
+  }
+
+  @media (max-width: 768px) {
+    .page-title { font-size: 2.2rem; }
+    .stats { gap: 32px; }
+    .stat-num { font-size: 1.6rem; }
+    .chapter-row {
+      grid-template-columns: 64px 1fr;
+      gap: 16px;
+    }
+    .ch-action {
+      grid-column: 1 / -1;
+      padding-top: 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .chapter-row {
+      grid-template-columns: 1fr;
+      padding: 20px;
+    }
+    .ch-number {
+      flex-direction: row;
+      gap: 8px;
+      min-width: 0;
+    }
+  }
+</style>

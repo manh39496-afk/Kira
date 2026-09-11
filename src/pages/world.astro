@@ -1,0 +1,265 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import { regions, lore } from '../data/world';
+---
+
+<Layout title="World" description="Explore the world of Aetherbound — the fallen capital, the free cities, the borderlands, and the lore of the Shattered Realm.">
+  <!-- Page hero -->
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow fade-in">The Shattered Realm</span>
+      <h1 class="page-title fade-in fade-in-delay-1">World</h1>
+      <div class="divider fade-in fade-in-delay-2"></div>
+      <p class="page-lead fade-in fade-in-delay-2">
+        A fractured continent held together by a fragile peace. Explore the regions, the factions, and the
+        buried history that drives the chronicle.
+      </p>
+    </div>
+  </section>
+
+  <!-- Regions -->
+  <section class="section">
+    <div class="container">
+      <SectionHeader eyebrow="Geography" title="Regions of the Realm" subtitle="From the crater of Old Aethel to the salt-crystal cathedrals of the Church, each region holds a piece of the truth — and a reason to hide it." />
+      <div class="region-list">
+        {regions.map((r, i) => (
+          <article class:list={['region-card', `region-${i % 2 === 0 ? 'left' : 'right'}`]} id={r.id}>
+            <div class="region-image">
+              <img src={r.image} alt={r.imageAlt} loading="lazy" />
+            </div>
+            <div class="region-content">
+              <span class="region-type">{r.type}</span>
+              <h2 class="region-name">{r.name}</h2>
+              <p class="region-summary">{r.summary}</p>
+              <p class="region-detail">{r.detail}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Lore -->
+  <section class="section section-alt">
+    <div class="container">
+      <SectionHeader eyebrow="The Deep Lore" title="Foundations of the Fall" subtitle="The history, the magic, and the uneasy alliances that shape every chapter of the chronicle." />
+      <div class="lore-grid">
+        {lore.map((entry) => (
+          <article class="lore-card">
+            <div class="lore-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M4 4h12a4 4 0 0 1 4 4v12H8a4 4 0 0 1-4-4V4z" />
+                <path d="M4 4v12a4 4 0 0 0 4 4" />
+                <path d="M8 8h8M8 12h8M8 16h5" />
+              </svg>
+            </div>
+            <h3 class="lore-title">{entry.title}</h3>
+            <p class="lore-body">{entry.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Factions summary -->
+  <section class="section">
+    <div class="container container-narrow">
+      <SectionHeader eyebrow="The Powers" title="Factions at a Glance" align="center" />
+      <div class="faction-list">
+        <div class="faction-item">
+          <h3>The Church of Aethel</h3>
+          <p>A theocratic body that teaches the Fall was a judgement. It controls Saltwatch and sends Collectors to recover — or destroy — anything touched by the sigil.</p>
+        </div>
+        <div class="faction-item">
+          <h3>The Veranthor Accord</h3>
+          <p>A fragile alliance of scholars, nobles, and free companies based in the coastal city-state. It is the closest thing the realm has to a government — and to a conspiracy.</p>
+        </div>
+        <div class="faction-item">
+          <h3>The Free Companies</h3>
+          <p>Disbanded soldiers who now garrison the Iron Marches. Sworn for life, paid in land they will never farm, and the only people who saw what came out of the Hollow.</p>
+        </div>
+        <div class="faction-item">
+          <h3>The Hollow Crown</h3>
+          <p>Not a faction but a force — whatever sleeps beneath the crater of Old Aethel. It has no army and no voice the living can hear. The sigil answers to it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    padding: 80px 0 48px;
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  .page-title {
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-size: 3rem;
+    color: var(--color-ink);
+    margin-bottom: 8px;
+  }
+
+  .page-lead {
+    font-size: 1.05rem;
+    color: var(--color-ink-soft);
+    max-width: 600px;
+  }
+
+  /* Regions */
+  .region-list {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+
+  .region-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .region-card.right {
+    direction: rtl;
+  }
+
+  .region-card.right > * {
+    direction: ltr;
+  }
+
+  .region-image {
+    aspect-ratio: 3/2;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--color-border-soft);
+    box-shadow: var(--shadow-md);
+  }
+
+  .region-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .region-card:hover .region-image img {
+    transform: scale(1.05);
+  }
+
+  .region-type {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .region-name {
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-size: 2rem;
+    color: var(--color-ink);
+    margin-bottom: 12px;
+  }
+
+  .region-summary {
+    font-size: 1.1rem;
+    color: var(--color-ink);
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .region-detail {
+    font-size: 0.92rem;
+    color: var(--color-ink-soft);
+    line-height: 1.7;
+  }
+
+  /* Lore */
+  .lore-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .lore-card {
+    padding: 32px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-md);
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+
+  .lore-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .lore-icon {
+    color: var(--color-gold);
+    margin-bottom: 16px;
+  }
+
+  .lore-title {
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-size: 1.3rem;
+    color: var(--color-ink);
+    margin-bottom: 12px;
+  }
+
+  .lore-body {
+    font-size: 0.88rem;
+    color: var(--color-ink-soft);
+    line-height: 1.7;
+  }
+
+  /* Factions */
+  .faction-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .faction-item {
+    text-align: left;
+    padding: 24px;
+    background: var(--color-surface);
+    border-left: 3px solid var(--color-gold);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  .faction-item h3 {
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--color-ink);
+    margin-bottom: 8px;
+  }
+
+  .faction-item p {
+    font-size: 0.88rem;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .lore-grid { grid-template-columns: 1fr; }
+    .faction-list { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .page-title { font-size: 2.2rem; }
+    .region-card,
+    .region-card.right {
+      grid-template-columns: 1fr;
+      direction: ltr;
+      gap: 24px;
+    }
+    .region-name { font-size: 1.6rem; }
+  }
+</style>

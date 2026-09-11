@@ -1,0 +1,36 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  align?: 'left' | 'center';
+}
+
+const { eyebrow, title, subtitle, align = 'left' } = Astro.props as Props;
+---
+
+<div class:list={['section-header', align]}>
+  {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+  <h2 class="section-title">{title}</h2>
+  <div class="divider"></div>
+  {subtitle && <p class="section-subtitle">{subtitle}</p>}
+</div>
+
+<style>
+  .section-header {
+    margin-bottom: 48px;
+  }
+
+  .section-header.center {
+    text-align: center;
+  }
+
+  .section-header.center .divider {
+    margin: 0 auto 24px;
+  }
+
+  .section-header.center .section-subtitle {
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>

@@ -1,0 +1,239 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { artworks } from '../data/artworks';
+
+const categories = [...new Set(artworks.map((a) => a.category))];
+---
+
+<Layout title="Art" description="The artist portfolio for Aetherbound — character concepts, environment key art, scene studies, and concept designs from the Shattered Realm.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow fade-in">Artist Portfolio</span>
+      <h1 class="page-title fade-in fade-in-delay-1">Art Gallery</h1>
+      <div class="divider fade-in fade-in-delay-2"></div>
+      <p class="page-lead fade-in fade-in-delay-2">
+        Visual companion pieces to the chronicle — character concepts, environment key art, and scene
+        studies from the world of Aetherbound.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <!-- Category filters -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All</button>
+        {categories.map((cat) => (
+          <button class="filter-btn" data-filter={cat}>{cat}</button>
+        ))}
+      </div>
+
+      <!-- Gallery grid -->
+      <div class="gallery" id="gallery">
+        {artworks.map((art) => (
+          <article
+            class:list={['gallery-item', `span-${art.span}`]}
+            data-category={art.category}
+          >
+            <div class="gallery-image-wrap">
+              <img src={art.image} alt={art.imageAlt} loading="lazy" />
+              <div class="gallery-overlay">
+                <div class="gallery-info">
+                  <span class="gallery-cat">{art.category}</span>
+                  <h3 class="gallery-title">{art.title}</h3>
+                  <p class="gallery-desc">{art.description}</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script is:inline>
+  const buttons = document.querySelectorAll('.filter-btn');
+  const items = document.querySelectorAll('.gallery-item');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-filter');
+      buttons.forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      items.forEach((item) => {
+        const cat = item.getAttribute('data-category');
+        if (filter === 'all' || cat === filter) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .page-hero {
+    padding: 80px 0 48px;
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  .page-title {
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-size: 3rem;
+    color: var(--color-ink);
+    margin-bottom: 8px;
+  }
+
+  .page-lead {
+    font-size: 1.05rem;
+    color: var(--color-ink-soft);
+    max-width: 560px;
+  }
+
+  /* Filter bar */
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .filter-btn {
+    padding: 8px 20px;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--color-ink-soft);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    transition: all var(--transition);
+  }
+
+  .filter-btn:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  .filter-btn.active {
+    color: #f7f3ec;
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  /* Gallery */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 240px;
+    gap: 16px;
+  }
+
+  .gallery-item.hidden {
+    display: none;
+  }
+
+  .span-wide {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  .span-tall {
+    grid-column: span 1;
+    grid-row: span 2;
+  }
+
+  .span-square {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .gallery-image-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--color-border-soft);
+    cursor: pointer;
+  }
+
+  .gallery-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .gallery-item:hover .gallery-image-wrap img {
+    transform: scale(1.06);
+  }
+
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(20, 16, 12, 0.85) 100%);
+    display: flex;
+    align-items: flex-end;
+    opacity: 0;
+    transition: opacity var(--transition);
+  }
+
+  .gallery-item:hover .gallery-overlay {
+    opacity: 1;
+  }
+
+  .gallery-info {
+    padding: 24px;
+  }
+
+  .gallery-cat {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-bottom: 6px;
+  }
+
+  .gallery-title {
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-size: 1.3rem;
+    color: #f7f3ec;
+    margin-bottom: 6px;
+  }
+
+  .gallery-desc {
+    font-size: 0.82rem;
+    color: #d4c8b8;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .gallery {
+      grid-template-columns: repeat(2, 1fr);
+      grid-auto-rows: 220px;
+    }
+    .span-wide { grid-column: span 2; }
+    .span-tall { grid-row: span 2; }
+  }
+
+  @media (max-width: 600px) {
+    .gallery {
+      grid-template-columns: 1fr;
+      grid-auto-rows: 260px;
+    }
+    .span-wide, .span-tall, .span-square {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+    .page-title { font-size: 2.2rem; }
+  }
+</style>

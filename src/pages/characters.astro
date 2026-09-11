@@ -1,0 +1,234 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { characters } from '../data/characters';
+---
+
+<Layout title="Characters" description="The characters of Aetherbound — soldiers, scholars, and the things that were once kings.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow fade-in">Dramatis Personae</span>
+      <h1 class="page-title fade-in fade-in-delay-1">Characters</h1>
+      <div class="divider fade-in fade-in-delay-2"></div>
+      <p class="page-lead fade-in fade-in-delay-2">
+        The figures whose choices will mend the Shattered Realm — or finish its ruin.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="char-grid">
+        {characters.map((c, i) => (
+          <article
+            class:list={['char-profile', `char-${i % 2 === 0 ? 'left' : 'right'}`]}
+            style={`--char-accent: ${c.accent}`}
+            id={c.id}
+          >
+            <div class="char-portrait-wrap">
+              <img src={c.portrait} alt={c.portraitAlt} loading="lazy" />
+              <div class="char-portrait-overlay" style={`background: linear-gradient(135deg, ${c.accent}22, transparent)`}></div>
+            </div>
+            <div class="char-info">
+              <span class="char-faction">{c.faction}</span>
+              <h2 class="char-name">{c.name}</h2>
+              <span class="char-title">{c.title}</span>
+              <div class="char-traits">
+                <div class="trait">
+                  <span class="trait-label">Element</span>
+                  <span class="trait-value">{c.element}</span>
+                </div>
+                <div class="trait">
+                  <span class="trait-label">Weapon</span>
+                  <span class="trait-value">{c.weapon}</span>
+                </div>
+              </div>
+              <p class="char-desc">{c.description}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    padding: 80px 0 48px;
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  .page-title {
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-size: 3rem;
+    color: var(--color-ink);
+    margin-bottom: 8px;
+  }
+
+  .page-lead {
+    font-size: 1.05rem;
+    color: var(--color-ink-soft);
+    max-width: 560px;
+  }
+
+  .char-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+  }
+
+  .char-profile {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .char-profile.right {
+    grid-template-columns: 1fr 320px;
+  }
+
+  .char-profile.right .char-portrait-wrap {
+    order: 2;
+  }
+
+  .char-portrait-wrap {
+    position: relative;
+    aspect-ratio: 3/4;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--color-border-soft);
+    box-shadow: var(--shadow-md);
+  }
+
+  .char-portrait-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+
+  .char-profile:hover .char-portrait-wrap img {
+    transform: scale(1.04);
+  }
+
+  .char-portrait-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .char-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 8px;
+    border-left: 3px solid var(--char-accent);
+    padding-left: 24px;
+  }
+
+  .char-profile.right .char-info {
+    order: 1;
+    text-align: right;
+    border-left: none;
+    border-right: 3px solid var(--char-accent);
+    padding-left: 0;
+    padding-right: 24px;
+  }
+
+  .char-faction {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--char-accent);
+    margin-bottom: 2px;
+  }
+
+  .char-name {
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-size: 2rem;
+    color: var(--color-ink);
+    line-height: 1.1;
+  }
+
+  .char-title {
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--color-ink-muted);
+    margin-bottom: 16px;
+  }
+
+  .char-traits {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 20px;
+  }
+
+  .char-profile.right .char-traits {
+    justify-content: flex-end;
+  }
+
+  .trait {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .trait-label {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+
+  .trait-value {
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .char-desc {
+    font-size: 0.95rem;
+    color: var(--color-ink-soft);
+    line-height: 1.7;
+    max-width: 540px;
+  }
+
+  .char-profile.right .char-desc {
+    margin-left: auto;
+  }
+
+  @media (max-width: 768px) {
+    .page-title { font-size: 2.2rem; }
+    .char-profile,
+    .char-profile.right {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .char-profile.right .char-portrait-wrap { order: 0; }
+    .char-profile.right .char-info {
+      order: 0;
+      text-align: left;
+      border-right: none;
+      padding-right: 0;
+    }
+    .char-profile.right .char-traits { justify-content: flex-start; }
+    .char-profile.right .char-desc { margin-left: 0; }
+    .char-portrait-wrap { max-width: 280px; }
+    .char-info {
+      border-left: 3px solid var(--char-accent);
+      padding-left: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .char-name { font-size: 1.6rem; }
+    .char-traits { gap: 24px; }
+  }
+</style>
