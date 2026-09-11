@@ -1,0 +1,142 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import { chapters } from '../data/chapters';
+
+const publishedChapters = chapters.filter((chapter) => chapter.status === 'published');
+const arcs = [...new Set(chapters.map((chapter) => chapter.arc))];
+---
+
+<Layout title="Stories" description="Explore the story archive, arcs, and available chapters of the SRPG web novel project.">
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow fade-in">Story Archive</span>
+      <h1 class="page-title fade-in fade-in-delay-1">Stories</h1>
+      <div class="divider fade-in fade-in-delay-2"></div>
+      <p class="page-lead fade-in fade-in-delay-2">
+        Follow the project story archive from its published chapters to the arcs still in development.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeader eyebrow="Main Story" title="The Web Novel" subtitle="Read the serialized chapter archive and follow each story arc in order." />
+      <div class="story-hub-grid">
+        <div class="story-hub-panel">
+          <span class="eyebrow">Current Archive</span>
+          <strong>{publishedChapters.length} published chapters</strong>
+          <span>{arcs.length} story arcs</span>
+        </div>
+        <a class="btn btn-primary story-hub-action" href="/web-novel">Open Chapter Index</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container container-narrow">
+      <SectionHeader eyebrow="Story Arcs" title="Read in Sequence" align="center" />
+      <div class="arc-list">
+        {arcs.map((arc, index) => (
+          <a class="arc-link" href="/web-novel">
+            <span class="arc-index">{String(index + 1).padStart(2, '0')}</span>
+            <span>{arc}</span>
+            <span aria-hidden="true">&rarr;</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    padding: 80px 0 48px;
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  .page-title {
+    font-family: 'Cormorant Garamond', var(--font-serif);
+    font-size: 3rem;
+    color: var(--color-ink);
+    margin-bottom: 8px;
+  }
+
+  .page-lead {
+    max-width: 560px;
+    font-size: 1.05rem;
+    color: var(--color-ink-soft);
+  }
+
+  .story-hub-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 32px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-soft);
+    border-left: 3px solid var(--color-gold);
+  }
+
+  .story-hub-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .story-hub-panel strong {
+    font-size: 1.4rem;
+  }
+
+  .story-hub-panel > span:last-child {
+    color: var(--color-ink-muted);
+  }
+
+  .story-hub-action {
+    flex-shrink: 0;
+  }
+
+  .arc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .arc-link {
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    color: var(--color-ink);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-soft);
+    text-decoration: none;
+  }
+
+  .arc-link:hover {
+    border-color: var(--color-gold);
+  }
+
+  .arc-index {
+    color: var(--color-primary);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  @media (max-width: 600px) {
+    .story-hub-grid {
+      align-items: flex-start;
+      flex-direction: column;
+      padding: 24px;
+    }
+
+    .story-hub-action {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
