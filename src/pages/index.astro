@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import SectionHeader from '../components/SectionHeader.astro';
+import CharacterCard from '../components/CharacterCard.astro';
 import { site } from '../data/site';
 import { chapters } from '../data/chapters';
 import { characters } from '../data/characters';
@@ -67,15 +68,7 @@ const featuredCharacters = characters.slice(0, 3);
       <SectionHeader eyebrow="Dramatis Personae" title="Who Walks the Story" subtitle="The figures whose choices will mend the realm or finish its ruin." />
       <div class="char-preview-grid">
         {featuredCharacters.map((c) => (
-          <a href="/characters" class="char-card" style={`--card-accent: ${c.accent}`}>
-            <div class="char-card-image">
-              <span class="empty-visual">Visual pending</span>
-            </div>
-            <div class="char-card-body">
-              <h3 class="char-name">{c.name}</h3>
-              <span class="char-title-text">{c.title}</span>
-            </div>
-          </a>
+          <CharacterCard character={c} />
         ))}
       </div>
       <div class="see-all">
@@ -396,56 +389,10 @@ const featuredCharacters = characters.slice(0, 3);
     gap: 24px;
   }
 
-  .char-card {
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border-soft);
-    transition: transform var(--transition), box-shadow var(--transition);
-  }
-
-  .char-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-  }
-
-  .char-card-image {
-    aspect-ratio: 3/4;
-    overflow: hidden;
-    border-bottom: 3px solid var(--card-accent);
-  }
-
-  .char-card-image .empty-visual {
-    width: 100%;
-    height: 100%;
-  }
-
   .home-empty-state {
     min-height: 220px;
     border: 1px solid var(--color-border-soft);
     border-radius: var(--radius-md);
-  }
-
-  .char-card-body {
-    padding: 16px 20px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .char-name {
-    font-size: 1.1rem;
-    color: var(--color-ink);
-  }
-
-  .char-title-text {
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    color: var(--color-ink-muted);
-    letter-spacing: 0.03em;
   }
 
   .see-all {
