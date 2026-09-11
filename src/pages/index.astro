@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import { site } from '../data/site';
-import { heroImage, heroImageAlt } from '../data/site';
 import { chapters } from '../data/chapters';
 import { characters } from '../data/characters';
 
@@ -14,7 +13,6 @@ const featuredCharacters = characters.slice(0, 3);
   <!-- Hero -->
   <section class="hero">
     <div class="hero-overlay"></div>
-    <img src={heroImage} alt={heroImageAlt} class="hero-bg" fetchpriority="high" />
     <div class="hero-content container">
       <span class="hero-eyebrow fade-in">{site.tagline}</span>
       <h1 class="hero-title fade-in fade-in-delay-1">{site.title}</h1>
@@ -94,7 +92,7 @@ const featuredCharacters = characters.slice(0, 3);
         {featuredCharacters.map((c) => (
           <a href="/characters" class="char-card" style={`--card-accent: ${c.accent}`}>
             <div class="char-card-image">
-              <img src={c.portrait} alt={c.portraitAlt} loading="lazy" />
+              <span class="empty-visual">Visual pending</span>
             </div>
             <div class="char-card-body">
               <h3 class="char-name">{c.name}</h3>
@@ -133,24 +131,14 @@ const featuredCharacters = characters.slice(0, 3);
     display: flex;
     align-items: center;
     overflow: hidden;
-  }
-
-  .hero-bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
+    background: linear-gradient(135deg, #2a2520 0%, #5a5048 55%, #8b5a2b 100%);
   }
 
   .hero-overlay {
     position: absolute;
     inset: 0;
     z-index: 1;
-    background:
-      linear-gradient(180deg, rgba(20, 16, 12, 0.5) 0%, rgba(20, 16, 12, 0.3) 40%, rgba(20, 16, 12, 0.75) 100%),
-      linear-gradient(90deg, rgba(20, 16, 12, 0.55) 0%, transparent 60%);
+    background: linear-gradient(180deg, rgba(20, 16, 12, 0.12) 0%, rgba(20, 16, 12, 0.5) 100%);
   }
 
   .hero-content {
@@ -409,15 +397,9 @@ const featuredCharacters = characters.slice(0, 3);
     border-bottom: 3px solid var(--card-accent);
   }
 
-  .char-card-image img {
+  .char-card-image .empty-visual {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-
-  .char-card:hover .char-card-image img {
-    transform: scale(1.05);
   }
 
   .char-card-body {

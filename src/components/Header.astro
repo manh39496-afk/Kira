@@ -1,7 +1,7 @@
 ---
 import { site } from '../data/site';
 
-const { nav, title, subtitle } = site;
+const { primaryNav, title, subtitle } = site;
 const currentPath = Astro.url.pathname;
 
 const isActive = (href: string) => {
@@ -10,13 +10,6 @@ const isActive = (href: string) => {
 };
 ---
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap"
-  rel="stylesheet"
-/>
-
 <header class="site-header" id="site-header">
   <div class="container header-inner">
     <a href="/" class="brand">
@@ -24,26 +17,35 @@ const isActive = (href: string) => {
       <span class="brand-sub">{subtitle}</span>
     </a>
     <nav class="nav-desktop" aria-label="Main navigation">
-      {nav.map((item) => (
+      {primaryNav.map((item) => (
         <a
           href={item.href}
           class:list={['nav-link', { active: isActive(item.href) }]}
+          aria-current={isActive(item.href) ? 'page' : undefined}
         >
           {item.label}
         </a>
       ))}
     </nav>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+    <button
+      class="nav-toggle"
+      id="nav-toggle"
+      type="button"
+      aria-label="Toggle main navigation"
+      aria-controls="nav-mobile"
+      aria-expanded="false"
+    >
       <span></span>
       <span></span>
       <span></span>
     </button>
   </div>
-  <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile navigation">
-    {nav.map((item) => (
+  <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile navigation" hidden>
+    {primaryNav.map((item) => (
       <a
         href={item.href}
         class:list={['nav-mobile-link', { active: isActive(item.href) }]}
+        aria-current={isActive(item.href) ? 'page' : undefined}
       >
         {item.label}
       </a>
@@ -57,20 +59,31 @@ const isActive = (href: string) => {
   const header = document.getElementById('site-header');
 
   toggle?.addEventListener('click', () => {
-    const open = menu?.classList.toggle('open') ?? false;
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    if (menu) {
+      menu.hidden = !open;
+      menu.classList.toggle('open', open);
+    }
     toggle.setAttribute('aria-expanded', String(open));
     toggle.classList.toggle('active', open);
   });
 
+  const closeMenu = () => {
+    if (!menu || !toggle) return;
+    menu.hidden = true;
+    menu.classList.remove('open');
+    toggle.classList.remove('active');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+
   menu?.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      menu.classList.remove('open');
-      toggle?.classList.remove('active');
-      toggle?.setAttribute('aria-expanded', 'false');
-    });
+    link.addEventListener('click', closeMenu);
   });
 
-  let lastScroll = 0;
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMenu();
+  });
+
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
     if (y > 10) {
@@ -78,7 +91,6 @@ const isActive = (href: string) => {
     } else {
       header?.classList.remove('scrolled');
     }
-    lastScroll = y;
   }, { passive: true });
 </script>
 
@@ -105,12 +117,14 @@ const isActive = (href: string) => {
     justify-content: space-between;
     padding-top: 16px;
     padding-bottom: 16px;
+    min-width: 0;
   }
 
   .brand {
     display: flex;
     flex-direction: column;
     text-decoration: none;
+    min-width: 0;
   }
 
   .brand-title {
@@ -130,6 +144,7 @@ const isActive = (href: string) => {
     text-transform: uppercase;
     color: var(--color-primary);
     margin-top: 2px;
+    white-space: nowrap;
   }
 
   .nav-desktop {
@@ -203,13 +218,6 @@ const isActive = (href: string) => {
     flex-direction: column;
     background: var(--color-bg);
     border-bottom: 1px solid var(--color-border);
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease;
-  }
-
-  .nav-mobile.open {
-    max-height: 400px;
   }
 
   .nav-mobile-link {
@@ -233,5 +241,12 @@ const isActive = (href: string) => {
     .nav-desktop { display: none; }
     .nav-toggle { display: flex; }
     .nav-mobile { display: flex; }
+
+    .nav-mobile[hidden] { display: none; }
+
+    .nav-mobile-link {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
   }
 </style>

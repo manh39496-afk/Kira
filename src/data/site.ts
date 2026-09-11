@@ -1,20 +1,19 @@
 export const site = {
-  title: 'Aetherbound',
-  subtitle: 'Chronicles of the Shattered Realm',
-  tagline: 'A Fantasy SRPG Web Novel & Art Portfolio',
-  author: 'Eira Vondrel',
+  title: 'SRPG Web Ecosystem',
+  subtitle: 'Fantasy world, story, art, and development project',
+  tagline: 'A fantasy world, story, character, art, and development project',
   description:
-    'In a world fractured by the Fall of Aethel, a forgotten soldier inherits a power that could mend the realm — or finish its ruin.',
-  nav: [
+    'A shared space for a fantasy world, its stories and characters, visual art, and ongoing SRPG development.',
+  primaryNav: [
     { label: 'Home', href: '/' },
-    { label: 'Web Novel', href: '/web-novel' },
-    { label: 'Characters', href: '/characters' },
     { label: 'World', href: '/world' },
+    { label: 'Stories', href: '/stories' },
+    { label: 'Characters', href: '/characters' },
     { label: 'Art', href: '/art' },
+    { label: 'Project', href: '/project' },
+  ],
+  secondaryNav: [
+    { label: 'Extras', href: '/extras' },
+    { label: 'Support', href: '/support' },
   ],
 };
-
-export const heroImage =
-  'https://images.pexels.com/photos/10754932/pexels-photo-10754932.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1280&dpr=1';
-
-export const heroImageAlt = 'A fog-laden medieval castle reflected in a misty lake at dawn';

@@ -20,34 +20,44 @@ const categories = [...new Set(artworks.map((a) => a.category))];
 
   <section class="section">
     <div class="container">
-      <!-- Category filters -->
-      <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all">All</button>
-        {categories.map((cat) => (
-          <button class="filter-btn" data-filter={cat}>{cat}</button>
-        ))}
-      </div>
+      {artworks.length > 0 ? (
+        <>
+          <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all">All</button>
+            {categories.map((cat) => (
+              <button class="filter-btn" data-filter={cat}>{cat}</button>
+            ))}
+          </div>
 
-      <!-- Gallery grid -->
-      <div class="gallery" id="gallery">
-        {artworks.map((art) => (
-          <article
-            class:list={['gallery-item', `span-${art.span}`]}
-            data-category={art.category}
-          >
-            <div class="gallery-image-wrap">
-              <img src={art.image} alt={art.imageAlt} loading="lazy" />
-              <div class="gallery-overlay">
-                <div class="gallery-info">
-                  <span class="gallery-cat">{art.category}</span>
-                  <h3 class="gallery-title">{art.title}</h3>
-                  <p class="gallery-desc">{art.description}</p>
-                </div>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
+          <div class="gallery" id="gallery">
+            {artworks.map((art) => (
+              <article
+                class:list={['gallery-item', `span-${art.span}`]}
+                data-category={art.category}
+              >
+                {art.image ? (
+                  <div class="gallery-image-wrap">
+                    <img src={art.image} alt={art.imageAlt ?? ''} loading="lazy" />
+                    <div class="gallery-overlay">
+                      <div class="gallery-info">
+                        <span class="gallery-cat">{art.category}</span>
+                        <h3 class="gallery-title">{art.title}</h3>
+                        <p class="gallery-desc">{art.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div class="gallery-image-wrap empty-visual">Visual pending</div>
+                )}
+              </article>
+            ))}
+          </div>
+        </>
+      ) : (
+        <div class="gallery-empty empty-visual">
+          <p>Project artwork has not yet been added.</p>
+        </div>
+      )}
     </div>
   </section>
 </Layout>
