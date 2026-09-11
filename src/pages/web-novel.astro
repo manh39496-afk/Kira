@@ -218,6 +218,7 @@ const totalWords = chapters.filter((c) => c.status === 'published').reduce((sum,
     display: flex;
     flex-direction: column;
     gap: 8px;
+    min-width: 0;
   }
 
   .ch-head {
@@ -252,6 +253,7 @@ const totalWords = chapters.filter((c) => c.status === 'published').reduce((sum,
 
   .ch-meta {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 8px;
     font-family: var(--font-sans);
