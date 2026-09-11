@@ -5,12 +5,17 @@ export const site = {
   author: 'Eira Vondrel',
   description:
     'In a world fractured by the Fall of Aethel, a forgotten soldier inherits a power that could mend the realm — or finish its ruin.',
-  nav: [
+  primaryNav: [
     { label: 'Home', href: '/' },
-    { label: 'Web Novel', href: '/web-novel' },
-    { label: 'Characters', href: '/characters' },
     { label: 'World', href: '/world' },
+    { label: 'Characters', href: '/characters' },
+    { label: 'Stories', href: '/web-novel' },
     { label: 'Art', href: '/art' },
+    { label: 'Project', href: '/project' },
+  ],
+  secondaryNav: [
+    { label: 'Extras', href: '/extras' },
+    { label: 'Support', href: '/support' },
   ],
 };
 

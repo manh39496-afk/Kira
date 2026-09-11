@@ -1,6 +1,6 @@
 ---
 import { site } from '../data/site';
-const { nav, title, author } = site;
+const { primaryNav, secondaryNav, title, author } = site;
 const year = new Date().getFullYear();
 ---
 
@@ -11,8 +11,8 @@ const year = new Date().getFullYear();
         <span class="footer-title">{title}</span>
         <span class="footer-author">Written & illustrated by {author}</span>
       </div>
-      <nav class="footer-nav" aria-label="Footer navigation">
-        {nav.map((item) => (
+      <nav class="footer-nav" aria-label="Primary footer navigation">
+        {primaryNav.map((item) => (
           <a href={item.href}>{item.label}</a>
         ))}
       </nav>
@@ -21,6 +21,11 @@ const year = new Date().getFullYear();
       <p>&copy; {year} {title}. All rights reserved.</p>
       <p class="footer-credit">A work of fiction. Names, characters, and places are products of the author's imagination.</p>
     </div>
+    <nav class="footer-secondary" aria-label="Secondary navigation">
+      {secondaryNav.map((item) => (
+        <a href={item.href}>{item.label}</a>
+      ))}
+    </nav>
   </div>
 </footer>
 
@@ -85,6 +90,24 @@ const year = new Date().getFullYear();
     display: flex;
     flex-direction: column;
     gap: 4px;
+  }
+
+  .footer-secondary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .footer-secondary a {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    color: #9a8d7d;
+    text-decoration: none;
+  }
+
+  .footer-secondary a:hover {
+    color: var(--color-gold);
   }
 
   .footer-bottom p {

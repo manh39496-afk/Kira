@@ -1,7 +1,7 @@
 ---
 import { site } from '../data/site';
 
-const { nav, title, subtitle } = site;
+const { primaryNav: nav, title, subtitle } = site;
 const currentPath = Astro.url.pathname;
 
 const isActive = (href: string) => {
@@ -28,22 +28,31 @@ const isActive = (href: string) => {
         <a
           href={item.href}
           class:list={['nav-link', { active: isActive(item.href) }]}
+          aria-current={isActive(item.href) ? 'page' : undefined}
         >
           {item.label}
         </a>
       ))}
     </nav>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+    <button
+      class="nav-toggle"
+      id="nav-toggle"
+      type="button"
+      aria-label="Toggle main navigation"
+      aria-controls="nav-mobile"
+      aria-expanded="false"
+    >
       <span></span>
       <span></span>
       <span></span>
     </button>
   </div>
-  <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile navigation">
+  <nav class="nav-mobile" id="nav-mobile" aria-label="Mobile navigation" hidden>
     {nav.map((item) => (
       <a
         href={item.href}
         class:list={['nav-mobile-link', { active: isActive(item.href) }]}
+        aria-current={isActive(item.href) ? 'page' : undefined}
       >
         {item.label}
       </a>
@@ -57,17 +66,29 @@ const isActive = (href: string) => {
   const header = document.getElementById('site-header');
 
   toggle?.addEventListener('click', () => {
-    const open = menu?.classList.toggle('open') ?? false;
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    if (menu) {
+      menu.hidden = !open;
+      menu.classList.toggle('open', open);
+    }
     toggle.setAttribute('aria-expanded', String(open));
     toggle.classList.toggle('active', open);
   });
 
+  const closeMenu = () => {
+    if (!menu || !toggle) return;
+    menu.hidden = true;
+    menu.classList.remove('open');
+    toggle.classList.remove('active');
+    toggle.setAttribute('aria-expanded', 'false');
+  };
+
   menu?.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      menu.classList.remove('open');
-      toggle?.classList.remove('active');
-      toggle?.setAttribute('aria-expanded', 'false');
-    });
+    link.addEventListener('click', closeMenu);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMenu();
   });
 
   let lastScroll = 0;
@@ -105,12 +126,14 @@ const isActive = (href: string) => {
     justify-content: space-between;
     padding-top: 16px;
     padding-bottom: 16px;
+    min-width: 0;
   }
 
   .brand {
     display: flex;
     flex-direction: column;
     text-decoration: none;
+    min-width: 0;
   }
 
   .brand-title {
@@ -130,6 +153,7 @@ const isActive = (href: string) => {
     text-transform: uppercase;
     color: var(--color-primary);
     margin-top: 2px;
+    white-space: nowrap;
   }
 
   .nav-desktop {
@@ -233,5 +257,12 @@ const isActive = (href: string) => {
     .nav-desktop { display: none; }
     .nav-toggle { display: flex; }
     .nav-mobile { display: flex; }
+
+    .nav-mobile[hidden] { display: none; }
+
+    .nav-mobile-link {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
   }
 </style>
