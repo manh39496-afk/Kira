@@ -1,5 +1,5 @@
 export const site = {
-  title: 'SRPG Web Ecosystem',
+  title: 'OAK',
   subtitle: 'Fantasy world, story, art, and development project',
   tagline: 'A fantasy world, story, character, art, and development project',
   description:
