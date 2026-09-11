@@ -1,88 +1,33 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { artworks } from '../data/artworks';
-
-const categories = [...new Set(artworks.map((a) => a.category))];
 ---
 
-<Layout title="Art" description="The artist portfolio for Aetherbound — character concepts, environment key art, scene studies, and concept designs from the Shattered Realm.">
+<Layout title="Art" description="The visual archive for the SRPG project, including character art, world art, illustrations, and development work.">
   <section class="page-hero">
     <div class="container">
-      <span class="eyebrow fade-in">Artist Portfolio</span>
+      <span class="eyebrow fade-in">Visual Archive</span>
       <h1 class="page-title fade-in fade-in-delay-1">Art Gallery</h1>
       <div class="divider fade-in fade-in-delay-2"></div>
       <p class="page-lead fade-in fade-in-delay-2">
-        Visual companion pieces to the chronicle — character concepts, environment key art, and scene
-        studies from the world of Aetherbound.
+        Approved project artwork will be added here as the visual archive develops.
       </p>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      {artworks.length > 0 ? (
-        <>
-          <div class="filter-bar">
-            <button class="filter-btn active" data-filter="all">All</button>
-            {categories.map((cat) => (
-              <button class="filter-btn" data-filter={cat}>{cat}</button>
-            ))}
-          </div>
-
-          <div class="gallery" id="gallery">
-            {artworks.map((art) => (
-              <article
-                class:list={['gallery-item', `span-${art.span}`]}
-                data-category={art.category}
-              >
-                {art.image ? (
-                  <div class="gallery-image-wrap">
-                    <img src={art.image} alt={art.imageAlt ?? ''} loading="lazy" />
-                    <div class="gallery-overlay">
-                      <div class="gallery-info">
-                        <span class="gallery-cat">{art.category}</span>
-                        <h3 class="gallery-title">{art.title}</h3>
-                        <p class="gallery-desc">{art.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div class="gallery-image-wrap empty-visual">Visual pending</div>
-                )}
-              </article>
-            ))}
-          </div>
-        </>
-      ) : (
-        <div class="gallery-empty empty-visual">
-          <p>Project artwork has not yet been added.</p>
-        </div>
-      )}
+      <div class="art-hub-grid">
+        {['Character Art', 'World Art', 'Illustrations', 'Development Art'].map((category) => (
+          <article class="art-channel">
+            <div class="art-channel-visual empty-visual">Visual pending</div>
+            <h2>{category}</h2>
+            <p>Approved project work for this collection has not yet been added.</p>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 </Layout>
-
-<script is:inline>
-  const buttons = document.querySelectorAll('.filter-btn');
-  const items = document.querySelectorAll('.gallery-item');
-
-  buttons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const filter = btn.getAttribute('data-filter');
-      buttons.forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      items.forEach((item) => {
-        const cat = item.getAttribute('data-category');
-        if (filter === 'all' || cat === filter) {
-          item.classList.remove('hidden');
-        } else {
-          item.classList.add('hidden');
-        }
-      });
-    });
-  });
-</script>
 
 <style>
   .page-hero {
@@ -102,6 +47,41 @@ const categories = [...new Set(artworks.map((a) => a.category))];
     font-size: 1.05rem;
     color: var(--color-ink-soft);
     max-width: 560px;
+  }
+
+  .art-hub-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .art-channel {
+    overflow: hidden;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-md);
+  }
+
+  .art-channel-visual {
+    min-height: 220px;
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  .art-channel h2,
+  .art-channel p {
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+
+  .art-channel h2 {
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-size: 1.3rem;
+  }
+
+  .art-channel p {
+    margin-bottom: 24px;
+    font-size: 0.9rem;
   }
 
   /* Filter bar */
@@ -236,6 +216,10 @@ const categories = [...new Set(artworks.map((a) => a.category))];
   }
 
   @media (max-width: 600px) {
+    .art-hub-grid {
+      grid-template-columns: 1fr;
+    }
+
     .gallery {
       grid-template-columns: 1fr;
       grid-auto-rows: 260px;
