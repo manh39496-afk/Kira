@@ -1,19 +1,19 @@
 export const site = {
   title: 'OAK',
-  subtitle: 'Fantasy world, story, art, and development project',
-  tagline: 'A fantasy world, story, character, art, and development project',
+  subtitle: 'Thế giới, câu chuyện, hình ảnh và dự án phát triển',
+  tagline: 'Một thế giới giả tưởng, câu chuyện, nhân vật và hành trình phát triển',
   description:
-    'A shared space for a fantasy world, its stories and characters, visual art, and ongoing SRPG development.',
+    'Nơi lưu giữ thế giới, câu chuyện, nhân vật, hình ảnh và hành trình phát triển của OAK.',
   primaryNav: [
-    { label: 'Home', href: '/' },
-    { label: 'World', href: '/world' },
-    { label: 'Stories', href: '/stories' },
-    { label: 'Characters', href: '/characters' },
-    { label: 'Art', href: '/art' },
-    { label: 'Project', href: '/project' },
+    { label: 'Trang chủ', href: '/' },
+    { label: 'Thế giới', href: '/world' },
+    { label: 'Truyện', href: '/stories' },
+    { label: 'Nhân vật', href: '/characters' },
+    { label: 'Hình ảnh', href: '/art' },
+    { label: 'Dự án', href: '/project' },
   ],
   secondaryNav: [
-    { label: 'Extras', href: '/extras' },
-    { label: 'Support', href: '/support' },
+    { label: 'Nội dung thêm', href: '/extras' },
+    { label: 'Ủng hộ', href: '/support' },
   ],
 };

@@ -3,14 +3,14 @@ import Layout from '../layouts/Layout.astro';
 import { characters } from '../data/characters';
 ---
 
-<Layout title="Characters" description="The characters of Aetherbound — soldiers, scholars, and the things that were once kings.">
+<Layout title="Nhân vật" description="Các nhân vật của Aetherbound: những người lính, học giả và những kẻ từng là vua.">
   <section class="page-hero">
     <div class="container">
-      <span class="eyebrow fade-in">Dramatis Personae</span>
-      <h1 class="page-title fade-in fade-in-delay-1">Characters</h1>
+      <span class="eyebrow fade-in">Nhân vật</span>
+      <h1 class="page-title fade-in fade-in-delay-1">Nhân vật</h1>
       <div class="divider fade-in fade-in-delay-2"></div>
       <p class="page-lead fade-in fade-in-delay-2">
-        The figures whose choices will mend the Shattered Realm — or finish its ruin.
+        Những người với lựa chọn có thể hàn gắn cõi giới tan vỡ hoặc hoàn tất sự diệt vong của nó.
       </p>
     </div>
   </section>
@@ -28,7 +28,7 @@ import { characters } from '../data/characters';
               {c.portrait ? (
                 <img src={c.portrait} alt={c.portraitAlt ?? ''} loading="lazy" />
               ) : (
-                <span class="empty-visual">Visual pending</span>
+                <span class="empty-visual">Hình ảnh đang được hoàn thiện</span>
               )}
             </div>
             <div class="char-info">
@@ -37,11 +37,11 @@ import { characters } from '../data/characters';
               <span class="char-title">{c.title}</span>
               <div class="char-traits">
                 <div class="trait">
-                  <span class="trait-label">Element</span>
+                  <span class="trait-label">Nguyên tố</span>
                   <span class="trait-value">{c.element}</span>
                 </div>
                 <div class="trait">
-                  <span class="trait-label">Weapon</span>
+                  <span class="trait-label">Vũ khí</span>
                   <span class="trait-value">{c.weapon}</span>
                 </div>
               </div>

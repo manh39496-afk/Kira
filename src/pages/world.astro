@@ -4,16 +4,15 @@ import SectionHeader from '../components/SectionHeader.astro';
 import { regions, lore } from '../data/world';
 ---
 
-<Layout title="World" description="Explore the world of Aetherbound — the fallen capital, the free cities, the borderlands, and the lore of the Shattered Realm.">
+<Layout title="Thế giới" description="Khám phá thế giới của Aetherbound: thủ đô sụp đổ, các thành bang tự do, vùng biên cương và những truyền thuyết của cõi giới tan vỡ.">
   <!-- Page hero -->
   <section class="page-hero">
     <div class="container">
-      <span class="eyebrow fade-in">The Shattered Realm</span>
-      <h1 class="page-title fade-in fade-in-delay-1">World</h1>
+      <span class="eyebrow fade-in">Cõi giới tan vỡ</span>
+      <h1 class="page-title fade-in fade-in-delay-1">Thế giới</h1>
       <div class="divider fade-in fade-in-delay-2"></div>
       <p class="page-lead fade-in fade-in-delay-2">
-        A fractured continent held together by a fragile peace. Explore the regions, the factions, and the
-        buried history that drives the chronicle.
+        Một lục địa tan vỡ được níu giữ bởi nền hòa bình mong manh. Khám phá các vùng đất, phe phái và lịch sử bị chôn vùi dẫn dắt biên niên sử.
       </p>
     </div>
   </section>
@@ -21,7 +20,7 @@ import { regions, lore } from '../data/world';
   <!-- Regions -->
   <section class="section">
     <div class="container">
-      <SectionHeader eyebrow="Geography" title="Regions of the Realm" subtitle="From the crater of Old Aethel to the salt-crystal cathedrals of the Church, each region holds a piece of the truth — and a reason to hide it." />
+      <SectionHeader eyebrow="Địa lý" title="Các vùng đất" subtitle="Từ miệng vực Old Aethel đến những thánh đường kết tinh muối của Giáo hội, mỗi vùng đất đều giữ một phần sự thật và một lý do để che giấu nó." />
       <div class="region-list">
         {regions.map((r, i) => (
           <article class:list={['region-card', `region-${i % 2 === 0 ? 'left' : 'right'}`]} id={r.id}>
@@ -29,7 +28,7 @@ import { regions, lore } from '../data/world';
               {r.image ? (
                 <img src={r.image} alt={r.imageAlt ?? ''} loading="lazy" />
               ) : (
-                <span class="empty-visual">Visual pending</span>
+                <span class="empty-visual">Hình ảnh đang được hoàn thiện</span>
               )}
             </div>
             <div class="region-content">
@@ -47,7 +46,7 @@ import { regions, lore } from '../data/world';
   <!-- Lore -->
   <section class="section section-alt">
     <div class="container">
-      <SectionHeader eyebrow="The Deep Lore" title="Foundations of the Fall" subtitle="The history, the magic, and the uneasy alliances that shape every chapter of the chronicle." />
+      <SectionHeader eyebrow="Những truyền thuyết sâu xa" title="Nền móng của sự sụp đổ" subtitle="Lịch sử, phép thuật và những liên minh bất ổn định hình từng chương của biên niên sử." />
       <div class="lore-grid">
         {lore.map((entry) => (
           <article class="lore-card">
@@ -69,9 +68,9 @@ import { regions, lore } from '../data/world';
   <!-- Timeline -->
   <section class="section">
     <div class="container container-narrow">
-      <SectionHeader eyebrow="Timeline" title="History in Progress" subtitle="Approved world milestones will be added here as the chronology is established." align="center" />
+      <SectionHeader eyebrow="Dòng thời gian" title="Lịch sử đang được hoàn thiện" subtitle="Các cột mốc thế giới được duyệt sẽ được bổ sung khi trình tự thời gian được xác lập." align="center" />
       <div class="timeline-empty empty-visual">
-        <p>The world timeline has not yet been added.</p>
+        <p>Dòng thời gian của thế giới đang được hoàn thiện.</p>
       </div>
     </div>
   </section>
@@ -79,23 +78,23 @@ import { regions, lore } from '../data/world';
   <!-- Factions summary -->
   <section class="section">
     <div class="container container-narrow">
-      <SectionHeader eyebrow="The Powers" title="Factions at a Glance" align="center" />
+      <SectionHeader eyebrow="Các thế lực" title="Tổng quan các phe phái" align="center" />
       <div class="faction-list">
         <div class="faction-item">
-          <h3>The Church of Aethel</h3>
-          <p>A theocratic body that teaches the Fall was a judgement. It controls Saltwatch and sends Collectors to recover — or destroy — anything touched by the sigil.</p>
+          <h3>Church of Aethel</h3>
+          <p>Một tổ chức thần quyền dạy rằng sự sụp đổ là phán xét. Giáo hội kiểm soát Saltwatch và phái các Collector thu hồi hoặc hủy diệt mọi thứ chạm vào dấu ấn.</p>
         </div>
         <div class="faction-item">
-          <h3>The Veranthor Accord</h3>
-          <p>A fragile alliance of scholars, nobles, and free companies based in the coastal city-state. It is the closest thing the realm has to a government — and to a conspiracy.</p>
+          <h3>Veranthor Accord</h3>
+          <p>Một liên minh mong manh của học giả, quý tộc và Free Companies đặt căn cứ tại thành bang ven biển. Đây là thứ gần với một chính quyền nhất, và cũng gần với một âm mưu nhất, mà cõi giới có được.</p>
         </div>
         <div class="faction-item">
-          <h3>The Free Companies</h3>
-          <p>Disbanded soldiers who now garrison the Iron Marches. Sworn for life, paid in land they will never farm, and the only people who saw what came out of the Hollow.</p>
+          <h3>Free Companies</h3>
+          <p>Những người lính giải ngũ hiện đồn trú tại Iron Marches. Họ thề phục vụ cả đời, được trả bằng những mảnh đất sẽ không bao giờ canh tác, và là những người duy nhất từng thấy thứ bước ra khỏi Hollow.</p>
         </div>
         <div class="faction-item">
-          <h3>The Hollow Crown</h3>
-          <p>Not a faction but a force — whatever sleeps beneath the crater of Old Aethel. It has no army and no voice the living can hear. The sigil answers to it.</p>
+          <h3>Hollow Crown</h3>
+          <p>Không phải một phe phái mà là một thế lực, bất kể thứ gì đang ngủ bên dưới miệng vực Old Aethel. Nó không có quân đội cũng không có tiếng nói người sống nghe được. Dấu ấn đáp lại nó.</p>
         </div>
       </div>
     </div>

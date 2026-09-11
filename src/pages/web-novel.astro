@@ -8,28 +8,28 @@ const publishedCount = chapters.filter((c) => c.status === 'published').length;
 const totalWords = chapters.filter((c) => c.status === 'published').reduce((sum, c) => sum + c.wordCount, 0);
 ---
 
-<Layout title="Web Novel" description="Read the chronicle of Aetherbound — chapters, arcs, and the unfolding story of the Shattered Realm.">
+<Layout title="Truyện dài kỳ" description="Đọc biên niên sử Aetherbound: các chương, hồi truyện và câu chuyện đang mở ra của cõi giới tan vỡ.">
   <!-- Page header -->
   <section class="page-hero">
     <div class="container">
-      <span class="eyebrow fade-in">The Chronicle</span>
-      <h1 class="page-title fade-in fade-in-delay-1">Web Novel</h1>
+      <span class="eyebrow fade-in">Biên niên sử</span>
+      <h1 class="page-title fade-in fade-in-delay-1">Truyện dài kỳ</h1>
       <div class="divider fade-in fade-in-delay-2"></div>
       <p class="page-lead fade-in fade-in-delay-2">
-        The full text of <em>Aetherbound</em>, serialized chapter by chapter. New installments arrive weekly.
+        Toàn văn <em>Aetherbound</em>, được đăng tải theo từng chương. Phần mới sẽ ra mắt hằng tuần.
       </p>
       <div class="stats fade-in fade-in-delay-3">
         <div class="stat">
           <span class="stat-num">{publishedCount}</span>
-          <span class="stat-label">Chapters Published</span>
+          <span class="stat-label">Chương đã xuất bản</span>
         </div>
         <div class="stat">
           <span class="stat-num">{arcs.length}</span>
-          <span class="stat-label">Story Arcs</span>
+          <span class="stat-label">Hồi truyện</span>
         </div>
         <div class="stat">
           <span class="stat-num">{(totalWords / 1000).toFixed(1)}k</span>
-          <span class="stat-label">Words Written</span>
+          <span class="stat-label">Từ đã viết</span>
         </div>
       </div>
     </div>
@@ -47,26 +47,26 @@ const totalWords = chapters.filter((c) => c.status === 'published').reduce((sum,
               {arcChapters.map((ch) => (
                 <article class:list={['chapter-row', { upcoming: ch.status === 'upcoming' }]}>
                   <div class="ch-number">
-                    <span class="ch-num-label">Ch.</span>
+                    <span class="ch-num-label">Chương</span>
                     <span class="ch-num-value">{String(ch.number).padStart(2, '0')}</span>
                   </div>
                   <div class="ch-body">
                     <div class="ch-head">
                       <h3 class="ch-name">{ch.title}</h3>
-                      {ch.status === 'upcoming' && <span class="ch-badge">Upcoming</span>}
+                      {ch.status === 'upcoming' && <span class="ch-badge">Sắp ra mắt</span>}
                     </div>
                     <p class="ch-excerpt">{ch.excerpt}</p>
                     <div class="ch-meta">
-                      <span>{new Date(ch.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                      <span>{new Date(ch.date).toLocaleDateString('vi-VN', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                       {ch.wordCount > 0 && <span class="ch-dot">&middot;</span>}
-                      {ch.wordCount > 0 && <span>{ch.wordCount.toLocaleString()} words</span>}
+                      {ch.wordCount > 0 && <span>{ch.wordCount.toLocaleString('vi-VN')} từ</span>}
                     </div>
                   </div>
                   <div class="ch-action">
                     {ch.status === 'published' ? (
-                      <a href="/web-novel" class="read-link">Read &rarr;</a>
+                      <a href="/web-novel" class="read-link">Đọc &rarr;</a>
                     ) : (
-                      <span class="read-link disabled">Coming Soon</span>
+                      <span class="read-link disabled">Sắp ra mắt</span>
                     )}
                   </div>
                 </article>
